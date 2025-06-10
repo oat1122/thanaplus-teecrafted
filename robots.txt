@@ -1,0 +1,32 @@
+# Robots.txt for TeeCrafted.com
+
+User-agent: *
+Allow: /
+
+# Disallow admin and private areas
+Disallow: /admin/
+Disallow: /api/
+Disallow: /_next/
+Disallow: /checkout/
+Disallow: /account/
+Disallow: /login/
+Disallow: /register/
+
+# Allow specific crawlers for images
+User-agent: Googlebot-Image
+Allow: /*
+
+# Allow specific crawlers for mobile
+User-agent: Googlebot-Mobile
+Allow: /
+
+# Sitemap location
+Sitemap: https://teecrafted.com/sitemap.xml
+Sitemap: https://teecrafted.com/sitemap-products.xml
+Sitemap: https://teecrafted.com/sitemap-categories.xml
+
+# Crawl delay (optional)
+Crawl-delay: 1
+
+# Host specification
+Host: https://teecrafted.com

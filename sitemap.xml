@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <!-- Homepage -->
+  <url>
+    <loc>https://teecrafted.com/</loc>
+    <lastmod>2024-12-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://teecrafted.com/og-image.jpg</image:loc>
+      <image:title>TeeCrafted - เสื้อสกรีนคุณภาพสูง</image:title>
+    </image:image>
+  </url>
+
+  <!-- Collection Page -->
+  <url>
+    <loc>https://teecrafted.com/collection</loc>
+    <lastmod>2024-12-01</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Category Pages -->
+  <url>
+    <loc>https://teecrafted.com/collection?category=เสื้อยืด</loc>
+    <lastmod>2024-12-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://teecrafted.com/collection?category=เสื้อโปโล</loc>
+    <lastmod>2024-12-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://teecrafted.com/collection?category=เสื้อฮู้ด</loc>
+    <lastmod>2024-12-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Product Pages -->
+  <url>
+    <loc>https://teecrafted.com/product/1</loc>
+    <lastmod>2024-12-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://images.unsplash.com/photo-1521572163474-6864f9cf17ab</image:loc>
+      <image:title>เสื้อยืดพรีเมียม สีขาว</image:title>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://teecrafted.com/product/2</loc>
+    <lastmod>2024-12-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://teecrafted.com/product/3</loc>
+    <lastmod>2024-12-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Static Pages -->
+  <url>
+    <loc>https://teecrafted.com/about</loc>
+    <lastmod>2024-11-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://teecrafted.com/contact</loc>
+    <lastmod>2024-11-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://teecrafted.com/privacy</loc>
+    <lastmod>2024-11-01</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+  <url>
+    <loc>https://teecrafted.com/terms</loc>
+    <lastmod>2024-11-01</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+</urlset>
