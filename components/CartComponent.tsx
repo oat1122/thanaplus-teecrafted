@@ -30,11 +30,76 @@ const CartComponent = () => {
     getCartItemCount,
     generateOrderCode,
   } = useCart();
-  
   // Only render after first mount to avoid hydration issues
   useEffect(() => {
     setMounted(true);
-  }, []);// Handle copy order code to clipboard
+  }, []);
+  
+  // Prevent body scrolling when cart is open
+  useEffect(() => {
+    if (isCartOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    
+    // Cleanup function to restore scrolling when component unmounts
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isCartOpen]);
+    // Create a style tag for custom scrollbar on mobile and laptop
+  useEffect(() => {
+    if (!mounted) return; // Only run this after component is mounted
+    
+    const styleTag = document.createElement('style');
+    styleTag.innerHTML = `
+      /* Mobile scrollbar styles */
+      @media (max-width: 768px) {
+        .cart-scroll-container {
+          -webkit-overflow-scrolling: touch;
+          overscroll-behavior: contain;
+        }
+        .cart-scroll-container::-webkit-scrollbar {
+          width: 4px;
+        }
+        .cart-scroll-container::-webkit-scrollbar-thumb {
+          background-color: rgba(0,0,0,0.2);
+          border-radius: 8px;
+        }
+      }
+      
+      /* Laptop scrollbar styles */
+      @media (min-width: 769px) {
+        .cart-scroll-container {
+          max-height: calc(100vh - 64px - 250px); /* Adjust height to show more products */
+          scrollbar-width: thin;
+          overscroll-behavior: contain;
+        }
+        .cart-scroll-container::-webkit-scrollbar {
+          width: 5px;
+        }
+        .cart-scroll-container::-webkit-scrollbar-track {
+          background: rgba(0,0,0,0.03);
+        }
+        .cart-scroll-container::-webkit-scrollbar-thumb {
+          background-color: rgba(0,0,0,0.15);
+          border-radius: 8px;
+          transition: background-color 0.3s ease;
+        }
+        .cart-scroll-container::-webkit-scrollbar-thumb:hover {
+          background-color: rgba(0,0,0,0.3);
+        }
+      }
+    `;
+    document.head.appendChild(styleTag);
+    
+    return () => {
+      document.head.removeChild(styleTag);
+    };
+  }, [mounted]);
+  
+  // Handle copy order code to clipboard
   const copyOrderCode = async () => {
     try {
       const { copyToClipboard } = await import('@/utils/clipboard');
@@ -55,7 +120,9 @@ const CartComponent = () => {
       orderCode
     )}`;
     window.open(lineUrl, "_blank");
-  };  // If not yet mounted, don't render anything to avoid hydration errors
+  };
+  
+  // If not yet mounted, don't render anything to avoid hydration errors
   if (!mounted) return null;
   
   return (
@@ -78,36 +145,34 @@ const CartComponent = () => {
             {getCartItemCount()}
           </span>
         )}
-      </button>{/* Cart Sidebar */}
-      {isCartOpen && (
+      </button>{/* Cart Sidebar */}      {isCartOpen && (
         <div className="fixed inset-0 z-50 overflow-hidden">
           {/* Backdrop */}
           <div
             className="absolute inset-0 bg-gradient-to-br from-gray-700/70 via-gray-900/70 to-black/70 backdrop-blur-sm"
             onClick={() => setIsCartOpen(false)}
           ></div>          {/* Sidebar */}
-          <div className="absolute right-0 top-0 h-full w-full sm:w-[80%] md:w-[60%] lg:max-w-md bg-gradient-to-br from-white to-gray-50 shadow-2xl backdrop-blur transform transition-all duration-300 ease-in-out border-l border-gray-100">
-            <div className="flex flex-col h-full">
-              {/* Header */}
-              <div className="p-4 sm:p-5 border-b border-gray-100 flex justify-between items-center bg-white/80 backdrop-blur-sm">
-                <h2 className="text-lg sm:text-xl font-semibold flex items-center">
-                  <ShoppingCart className="h-5 w-5 mr-2 text-gray-700" />
-                  ตะกร้าสินค้า
-                  {getCartItemCount() > 0 && (
-                    <span className="ml-2 bg-gray-100 text-gray-800 py-1 px-2 sm:px-3 rounded-full text-xs sm:text-sm font-medium">
-                      {getCartItemCount()} รายการ
-                    </span>
-                  )}
-                </h2>
+          <div className="absolute right-0 top-0 h-full w-full sm:w-[80%] md:w-[60%] lg:w-[50%] xl:w-[40%] bg-white shadow-2xl transform transition-all duration-300 ease-in-out border-l border-gray-100 flex flex-col">
+            <div className="flex flex-col h-full overflow-hidden">{/* Header */}
+              <div className="py-3 px-4 sm:py-4 sm:px-5 border-b border-gray-100 flex justify-between items-center bg-white backdrop-blur-sm sticky top-0 z-10">
+                <div className="flex items-center">
+                  <ShoppingCart className="h-5 w-5 mr-2.5 text-gray-700 flex-shrink-0" />
+                  <div>
+                    <h2 className="font-semibold text-lg text-gray-800">ตะกร้าสินค้า</h2>
+                    {getCartItemCount() > 0 && (
+                      <p className="text-xs text-gray-500 mt-0.5">{getCartItemCount()} รายการ</p>
+                    )}
+                  </div>
+                </div>
                 <button
                   onClick={() => setIsCartOpen(false)}
-                  className="p-2 rounded-full hover:bg-gray-100 transition-colors"
+                  className="p-2 rounded-full hover:bg-gray-100 transition-colors flex-shrink-0"
                   aria-label="ปิด"
                 >
-                  <X className="h-6 w-6 text-gray-700" />
+                  <X className="h-5 w-5 text-gray-700" />
                 </button>
-              </div>              {/* Cart Items */}
-              <div className="flex-1 overflow-y-auto p-4">
+              </div>{/* Cart Items */}
+              <div className="flex-1 overflow-y-auto overscroll-contain p-3 sm:p-4 -webkit-overflow-scrolling-touch cart-scroll-container">
                 {cartItems.length === 0 ? (
                   <div className="text-center py-16 px-4">                    <div className="w-16 h-16 sm:w-20 sm:h-20 mx-auto bg-gray-50 rounded-full flex items-center justify-center mb-4">
                       <ShoppingCart className="h-8 w-8 sm:h-10 sm:w-10 text-gray-400" />
@@ -120,42 +185,39 @@ const CartComponent = () => {
                     >
                       เลือกซื้อสินค้า
                     </Link>
-                  </div>
-                ) : (
-                  <div className="space-y-4 py-2">                    {cartItems.map((item) => (
+                  </div>                ) : (
+                  <div className="space-y-3 py-2">                    {cartItems.map((item) => (
                       <div
                         key={`${item.id}-${item.size || 'default'}-${item.color || 'default'}`}
                         className="flex border border-gray-100 rounded-xl overflow-hidden bg-white shadow-sm hover:shadow-md transition-all duration-200"
                       >                        {/* Image */}
-                        <div className="w-20 h-20 sm:w-24 md:w-28 sm:h-24 md:h-28 relative">
+                        <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 relative">
                           <Image
                             src={item.image}
                             alt={item.name}
                             fill
                             style={{ objectFit: "cover" }}
-                            sizes="(max-width: 640px) 80px, (max-width: 768px) 96px, 112px"
+                            sizes="(max-width: 640px) 64px, (max-width: 768px) 80px, (max-width: 1024px) 96px, 112px"
                             className="bg-gray-50"
                           />
-                        </div>
-
-                        {/* Details */}
+                        </div>                        {/* Details */}
                         <div className="flex-1 p-2 sm:p-3 md:p-4 flex flex-col">
                           <div className="flex justify-between">
-                            <h3 className="font-medium text-gray-900 line-clamp-1 text-sm sm:text-base">
+                            <h3 className="font-medium text-gray-900 line-clamp-2 text-sm sm:text-base">
                               {item.name}
                             </h3>                            <button
                               onClick={() => removeFromCart(item.id, item.size, item.color)}
-                              className="text-gray-400 hover:text-red-500 transition-colors"
+                              className="text-gray-400 hover:text-red-500 transition-colors ml-1"
                               aria-label="ลบรายการ"
                             >
                               <Trash2 className="h-4 w-4" />
                             </button>
-                          </div>                          <div className="text-sm text-gray-500 mb-2 mt-1 flex flex-wrap gap-1 sm:gap-2">
+                          </div>                          <div className="text-xs sm:text-sm text-gray-500 mb-1 sm:mb-2 mt-0.5 sm:mt-1 flex flex-wrap gap-1 sm:gap-2">
                             {item.size && (
                               <span className="inline-flex items-center bg-gray-50 px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-md text-xs font-medium">ขนาด: {item.size}</span>
                             )}
                             {item.color && <span className="inline-flex items-center bg-gray-50 px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-md text-xs font-medium">สี: {item.color}</span>}
-                          </div>                          <div className="mt-auto flex flex-col sm:flex-row gap-2 sm:gap-0 sm:justify-between sm:items-center">
+                          </div>                          <div className="mt-auto flex flex-row justify-between items-center">
                             <div className="flex items-center border rounded-lg shadow-sm overflow-hidden w-fit">
                               <button
                                 onClick={() =>
@@ -166,12 +228,12 @@ const CartComponent = () => {
                                     item.color
                                   )
                                 }
-                                className="p-1.5 sm:p-2 bg-white hover:bg-gray-50 text-gray-500 hover:text-gray-700 transition-colors"
+                                className="p-1 sm:p-1.5 bg-white hover:bg-gray-50 text-gray-500 hover:text-gray-700 transition-colors"
                                 aria-label="ลดจำนวน"
                               >
-                                <Minus className="h-3 w-3" />
+                                <Minus className="h-2.5 w-2.5 sm:h-3 sm:w-3" />
                               </button>
-                              <span className="px-2 sm:px-3 font-medium text-gray-800 bg-white text-sm">{item.quantity}</span>
+                              <span className="px-1.5 sm:px-2 md:px-3 font-medium text-gray-800 bg-white text-xs sm:text-sm">{item.quantity}</span>
                               <button
                                 onClick={() =>
                                   updateQuantity(
@@ -181,13 +243,13 @@ const CartComponent = () => {
                                     item.color
                                   )
                                 }
-                                className="p-1.5 sm:p-2 bg-white hover:bg-gray-50 text-gray-500 hover:text-gray-700 transition-colors"
+                                className="p-1 sm:p-1.5 bg-white hover:bg-gray-50 text-gray-500 hover:text-gray-700 transition-colors"
                                 aria-label="เพิ่มจำนวน"
                               >
-                                <Plus className="h-3 w-3" />
+                                <Plus className="h-2.5 w-2.5 sm:h-3 sm:w-3" />
                               </button>
                             </div>
-                            <div className="font-semibold bg-gray-50 px-2 sm:px-3 py-1 rounded-lg text-gray-800 text-sm sm:text-base w-fit sm:w-auto self-end sm:self-auto">
+                            <div className="font-semibold bg-gray-50 px-2 sm:px-3 py-0.5 sm:py-1 rounded-lg text-gray-800 text-xs sm:text-sm md:text-base">
                               ฿{(item.price * item.quantity).toLocaleString()}
                             </div>
                           </div>
@@ -198,40 +260,40 @@ const CartComponent = () => {
                 )}
               </div>              {/* Footer */}
               {cartItems.length > 0 && (
-                <div className="border-t border-gray-100 p-3 sm:p-4 md:p-5 space-y-3 sm:space-y-4 md:space-y-5 bg-gradient-to-b from-gray-50/50 to-white">
-                  {/* Total */}
+                <div className="border-t border-gray-100 p-3 sm:p-4 md:p-5 space-y-3 bg-white flex-shrink-0">{/* Total */}
                   <div className="flex justify-between items-center bg-white p-3 sm:p-4 rounded-xl shadow-sm border border-gray-50">
-                    <span className="font-semibold text-base sm:text-lg text-gray-800">รวมทั้งสิ้น</span>
-                    <span className="font-bold text-lg sm:text-xl text-gray-900">
+                    <div>
+                      <span className="font-semibold text-sm sm:text-base text-gray-800">รวมทั้งสิ้น</span>
+                      <p className="text-xs text-gray-500 mt-0.5">สินค้า {getCartItemCount()} รายการ</p>
+                    </div>
+                    <span className="font-bold text-base sm:text-lg md:text-xl text-gray-900">
                       ฿{getCartTotal().toLocaleString()}
                     </span>
-                  </div>
-
-                  {/* Order Code Section */}                  <div className="bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl p-3 sm:p-4 shadow-sm">
-                    <h4 className="font-semibold text-gray-900 mb-2 sm:mb-3 flex items-center text-sm sm:text-base">
-                      <Copy className="h-3 w-3 sm:h-4 sm:w-4 mr-1.5 sm:mr-2 opacity-70" />
+                  </div>                  {/* Order Code Section */}                  <div className="bg-gray-50 rounded-xl p-3 sm:p-4 shadow-sm">
+                    <h4 className="font-semibold text-gray-900 mb-2 flex items-center text-sm sm:text-base">
+                      <Copy className="h-3.5 w-3.5 sm:h-4 sm:w-4 mr-1.5 sm:mr-2 text-blue-500" />
                       โค้ดสั่งซื้อ:
                     </h4>
                     <p className="text-xs text-blue-600 mb-2">
                       คัดลอกโค้ดนี้แล้วแอดไลน์ <strong>@teecrafted</strong> เพื่อส่งคำสั่งซื้อ
                     </p>
-                    <div className="bg-white/80 backdrop-blur-sm rounded-lg p-2.5 sm:p-4 border border-gray-100 shadow-inner">
-                      <pre className="whitespace-pre-wrap text-gray-700 max-h-32 sm:max-h-48 overflow-y-auto text-xs sm:text-sm">
+                    <div className="bg-white rounded-lg p-3 border border-gray-100 shadow-inner">
+                      <pre className="whitespace-pre-wrap text-gray-700 max-h-24 sm:max-h-32 overflow-y-auto text-xs leading-relaxed">
                         {generateOrderCode()}
                       </pre>
                     </div>
-                  </div>{/* Action Buttons */}
+                  </div>                  {/* Action Buttons */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
                     <button
                       onClick={copyOrderCode}
-                      className="bg-gradient-to-r from-blue-500 to-blue-600 text-white py-2.5 sm:py-3 rounded-xl text-sm sm:text-base font-medium hover:from-blue-600 hover:to-blue-700 transition-all shadow-sm hover:shadow flex items-center justify-center space-x-1.5 sm:space-x-2"
+                      className="bg-blue-500 text-white py-2.5 sm:py-3 rounded-xl text-sm sm:text-base font-medium hover:bg-blue-600 transition-all shadow-sm hover:shadow flex items-center justify-center space-x-1.5 sm:space-x-2"
                     >
                       <Copy className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
                       <span>{copied ? "คัดลอกแล้ว!" : "คัดลอกโค้ด"}</span>
                     </button>
                     <button
                       onClick={openLineWithOrder}
-                      className="bg-gradient-to-r from-green-500 to-green-600 text-white py-2.5 sm:py-3 rounded-xl text-sm sm:text-base font-medium hover:from-green-600 hover:to-green-700 transition-all shadow-sm hover:shadow flex items-center justify-center space-x-1.5 sm:space-x-2"
+                      className="bg-green-500 text-white py-2.5 sm:py-3 rounded-xl text-sm sm:text-base font-medium hover:bg-green-600 transition-all shadow-sm hover:shadow flex items-center justify-center space-x-1.5 sm:space-x-2"
                     >                      <MessageCircle className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
                       <span>เปิด LINE พร้อมข้อความสั่งซื้อ</span>
                     </button>
@@ -240,7 +302,7 @@ const CartComponent = () => {
                   {/* Clear Cart */}
                   <button
                     onClick={clearCart}
-                    className="w-full border border-red-200 text-red-600 py-2.5 sm:py-3 rounded-xl text-sm sm:text-base font-medium hover:bg-red-50/80 transition-colors flex items-center justify-center space-x-1.5 sm:space-x-2"
+                    className="w-full border border-gray-200 text-gray-600 py-2.5 sm:py-3 rounded-xl text-sm sm:text-base font-medium hover:bg-gray-50 transition-colors flex items-center justify-center space-x-1.5 sm:space-x-2"
                   >
                     <Trash2 className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
                     <span>ล้างตะกร้า</span>
