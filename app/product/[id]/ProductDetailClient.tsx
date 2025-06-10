@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import { Product } from "@/data/products";
+import CopyFallbackModal from "@/components/CopyFallbackModal";
 
 interface ProductDetailClientProps {
   product: Product;
@@ -25,6 +26,7 @@ const ProductDetailClient = ({ product }: ProductDetailClientProps) => {
   const [showOrderCode, setShowOrderCode] = useState(false);
   const [copied, setCopied] = useState(false);
   const [addedToCart, setAddedToCart] = useState(false);
+  const [showFallbackModal, setShowFallbackModal] = useState(false);
   const { addToCart } = useCart();
 
   // Generate LINE order code
@@ -42,16 +44,16 @@ const ProductDetailClient = ({ product }: ProductDetailClientProps) => {
 #สั่งซื้อ #TeeCrafted
 Link: ${baseUrl}/product/${product.id}`;
     return orderCode;
-  };
-
-  // Copy to clipboard
+  };  // Copy to clipboard
   const copyOrderCode = async () => {
     try {
-      await navigator.clipboard.writeText(generateOrderCode());
+      const { copyToClipboard } = await import('@/utils/clipboard');
+      await copyToClipboard(generateOrderCode());
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch (err) {
       console.error("Failed to copy: ", err);
+      setShowFallbackModal(true);
     }
   };
 
@@ -63,9 +65,16 @@ Link: ${baseUrl}/product/${product.id}`;
     )}`;
     window.open(lineUrl, "_blank");
   };
-
   return (
     <div className="space-y-6">
+      {/* Fallback Copy Modal */}
+      <CopyFallbackModal 
+        isOpen={showFallbackModal}
+        onClose={() => setShowFallbackModal(false)}
+        text={generateOrderCode()}
+        title="คัดลอกโค้ดสั่งซื้อ"
+      />
+      
       <div>
         <span className="inline-block px-3 py-1 bg-gray-100 text-gray-600 text-sm rounded-full mb-2">
           {product.category}

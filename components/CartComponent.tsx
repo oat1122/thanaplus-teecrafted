@@ -13,9 +13,11 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import CopyFallbackModal from "./CopyFallbackModal";
 
 const CartComponent = () => {
   const [copied, setCopied] = useState(false);
+  const [showFallbackModal, setShowFallbackModal] = useState(false);
   const {
     cartItems,
     isCartOpen,
@@ -26,16 +28,17 @@ const CartComponent = () => {
     getCartTotal,
     getCartItemCount,
     generateOrderCode,
-  } = useCart();
-
-  // Handle copy order code to clipboard
+  } = useCart();  // Handle copy order code to clipboard
   const copyOrderCode = async () => {
     try {
-      await navigator.clipboard.writeText(generateOrderCode());
+      const { copyToClipboard } = await import('@/utils/clipboard');
+      await copyToClipboard(generateOrderCode());
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch (err) {
       console.error("Failed to copy: ", err);
+      // Show fallback modal instead of alert
+      setShowFallbackModal(true);
     }
   };
 
@@ -47,9 +50,16 @@ const CartComponent = () => {
     )}`;
     window.open(lineUrl, "_blank");
   };
-
   return (
     <>
+      {/* Fallback Copy Modal */}
+      <CopyFallbackModal 
+        isOpen={showFallbackModal}
+        onClose={() => setShowFallbackModal(false)}
+        text={generateOrderCode()}
+        title="คัดลอกโค้ดสั่งซื้อ"
+      />
+      
       {/* Floating Cart Button */}
       <button
         onClick={() => setIsCartOpen(true)}
