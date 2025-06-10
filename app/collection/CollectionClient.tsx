@@ -13,17 +13,34 @@ const CollectionClient = () => {
   const filteredProducts =
     selectedCategory === "ทั้งหมด"
       ? products
-      : products.filter((product) => product.category === selectedCategory);
-
-  const sortedProducts = [...filteredProducts].sort((a, b) => {
-    // แสดงสินค้า featured ก่อนเสมอ
+      : products.filter((product) => product.category === selectedCategory);  const sortedProducts = [...filteredProducts].sort((a, b) => {
+    // เรียงลำดับตามตัวเลือกที่ผู้ใช้เลือกก่อน
+    if (sortBy === "ราคาต่ำ-สูง") {
+      const priceDiff = a.price - b.price;
+      // ถ้าราคาเท่ากัน ให้ featured อยู่ก่อน
+      if (priceDiff === 0) {
+        if (a.featured && !b.featured) return -1;
+        if (!a.featured && b.featured) return 1;
+      }
+      return priceDiff;
+    }
+    
+    if (sortBy === "ราคาสูง-ต่ำ") {
+      const priceDiff = b.price - a.price;
+      // ถ้าราคาเท่ากัน ให้ featured อยู่ก่อน
+      if (priceDiff === 0) {
+        if (a.featured && !b.featured) return -1;
+        if (!a.featured && b.featured) return 1;
+      }
+      return priceDiff;
+    }
+    
+    // ล่าสุด - แสดง featured ก่อน และถ้า featured เหมือนกันให้เรียงตาม id
     if (a.featured && !b.featured) return -1;
     if (!a.featured && b.featured) return 1;
-
-    // ถ้าทั้งคู่เป็น featured หรือไม่เป็น featured ให้เรียงตาม sortBy
-    if (sortBy === "ราคาต่ำ-สูง") return a.price - b.price;
-    if (sortBy === "ราคาสูง-ต่ำ") return b.price - a.price;
-    return 0; // ล่าสุด (default order)
+    
+    // เรียงตาม id (สมมติว่า id สูงคือสินค้าใหม่)
+    return b.id - a.id;
   });
 
   return (

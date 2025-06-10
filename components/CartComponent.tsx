@@ -67,40 +67,34 @@ const CartComponent = () => {
         text={generateOrderCode()}
         title="คัดลอกโค้ดสั่งซื้อ"
       />
-      
-      {/* Floating Cart Button */}
-      <button
+        {/* Floating Cart Button */}      <button
         onClick={() => setIsCartOpen(true)}
-        className="fixed bottom-6 right-6 z-50 bg-gray-900 text-white rounded-full p-4 shadow-lg hover:bg-gray-800 transition-all"
+        className="fixed bottom-4 sm:bottom-6 right-4 sm:right-6 z-50 bg-gradient-to-r from-gray-800 to-gray-900 text-white rounded-full p-3 sm:p-4 shadow-lg hover:shadow-xl hover:from-gray-700 hover:to-gray-800 transition-all duration-300"
         aria-label="ตะกร้าสินค้า"
       >
-        <ShoppingCart className="h-6 w-6" />
+        <ShoppingCart className="h-5 w-5 sm:h-6 sm:w-6" />
         {getCartItemCount() > 0 && (
-          <span className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold">
+          <span className="absolute -top-1 sm:-top-2 -right-1 sm:-right-2 bg-gradient-to-r from-red-500 to-red-600 text-white rounded-full w-5 h-5 sm:w-6 sm:h-6 flex items-center justify-center text-[10px] sm:text-xs font-bold shadow-md animate-pulse">
             {getCartItemCount()}
           </span>
         )}
-      </button>
-
-      {/* Cart Sidebar */}
+      </button>{/* Cart Sidebar */}
       {isCartOpen && (
         <div className="fixed inset-0 z-50 overflow-hidden">
           {/* Backdrop */}
           <div
-            className="absolute inset-0 bg-black bg-opacity-50"
+            className="absolute inset-0 bg-gradient-to-br from-gray-700/70 via-gray-900/70 to-black/70 backdrop-blur-sm"
             onClick={() => setIsCartOpen(false)}
-          ></div>
-
-          {/* Sidebar */}
-          <div className="absolute right-0 top-0 h-full w-full max-w-md bg-white shadow-xl transform transition-all duration-300 ease-in-out">
+          ></div>          {/* Sidebar */}
+          <div className="absolute right-0 top-0 h-full w-full sm:w-[80%] md:w-[60%] lg:max-w-md bg-gradient-to-br from-white to-gray-50 shadow-2xl backdrop-blur transform transition-all duration-300 ease-in-out border-l border-gray-100">
             <div className="flex flex-col h-full">
               {/* Header */}
-              <div className="p-4 border-b flex justify-between items-center">
-                <h2 className="text-xl font-semibold flex items-center">
-                  <ShoppingCart className="h-5 w-5 mr-2" />
+              <div className="p-4 sm:p-5 border-b border-gray-100 flex justify-between items-center bg-white/80 backdrop-blur-sm">
+                <h2 className="text-lg sm:text-xl font-semibold flex items-center">
+                  <ShoppingCart className="h-5 w-5 mr-2 text-gray-700" />
                   ตะกร้าสินค้า
                   {getCartItemCount() > 0 && (
-                    <span className="ml-2 bg-gray-100 text-gray-800 py-1 px-2 rounded-full text-sm">
+                    <span className="ml-2 bg-gray-100 text-gray-800 py-1 px-2 sm:px-3 rounded-full text-xs sm:text-sm font-medium">
                       {getCartItemCount()} รายการ
                     </span>
                   )}
@@ -110,63 +104,60 @@ const CartComponent = () => {
                   className="p-2 rounded-full hover:bg-gray-100 transition-colors"
                   aria-label="ปิด"
                 >
-                  <X className="h-6 w-6" />
+                  <X className="h-6 w-6 text-gray-700" />
                 </button>
-              </div>
-
-              {/* Cart Items */}
+              </div>              {/* Cart Items */}
               <div className="flex-1 overflow-y-auto p-4">
                 {cartItems.length === 0 ? (
-                  <div className="text-center py-12">
-                    <ShoppingCart className="h-12 w-12 mx-auto text-gray-300" />
-                    <p className="mt-4 text-gray-500">ไม่มีสินค้าในตะกร้า</p>
+                  <div className="text-center py-16 px-4">                    <div className="w-16 h-16 sm:w-20 sm:h-20 mx-auto bg-gray-50 rounded-full flex items-center justify-center mb-4">
+                      <ShoppingCart className="h-8 w-8 sm:h-10 sm:w-10 text-gray-400" />
+                    </div>
+                    <h3 className="text-lg sm:text-xl font-semibold text-gray-800 mb-2">ตะกร้าของคุณว่างเปล่า</h3>
+                    <p className="text-sm sm:text-base text-gray-500 mb-4 sm:mb-6">ลองเลือกซื้อสินค้าที่คุณชื่นชอบ</p>
                     <Link
                       href="/collection"
-                      className="mt-4 inline-block bg-gray-900 text-white px-5 py-3 rounded-lg font-medium hover:bg-gray-800 transition-colors"
+                      className="inline-block bg-gradient-to-r from-gray-800 to-gray-900 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg text-sm sm:text-base font-medium hover:from-gray-700 hover:to-gray-800 transition-all duration-300 shadow-md hover:shadow-lg"
                     >
                       เลือกซื้อสินค้า
                     </Link>
                   </div>
                 ) : (
-                  <div className="space-y-4">                    {cartItems.map((item) => (
+                  <div className="space-y-4 py-2">                    {cartItems.map((item) => (
                       <div
                         key={`${item.id}-${item.size || 'default'}-${item.color || 'default'}`}
-                        className="flex border rounded-lg overflow-hidden"
-                      >
-                        {/* Image */}
-                        <div className="w-24 h-24 relative">
+                        className="flex border border-gray-100 rounded-xl overflow-hidden bg-white shadow-sm hover:shadow-md transition-all duration-200"
+                      >                        {/* Image */}
+                        <div className="w-20 h-20 sm:w-24 md:w-28 sm:h-24 md:h-28 relative">
                           <Image
                             src={item.image}
                             alt={item.name}
                             fill
                             style={{ objectFit: "cover" }}
-                            sizes="(max-width: 768px) 96px, 96px"
+                            sizes="(max-width: 640px) 80px, (max-width: 768px) 96px, 112px"
+                            className="bg-gray-50"
                           />
                         </div>
 
                         {/* Details */}
-                        <div className="flex-1 p-3 flex flex-col">
+                        <div className="flex-1 p-2 sm:p-3 md:p-4 flex flex-col">
                           <div className="flex justify-between">
-                            <h3 className="font-medium text-gray-900">
+                            <h3 className="font-medium text-gray-900 line-clamp-1 text-sm sm:text-base">
                               {item.name}
                             </h3>                            <button
                               onClick={() => removeFromCart(item.id, item.size, item.color)}
-                              className="text-gray-400 hover:text-red-500"
+                              className="text-gray-400 hover:text-red-500 transition-colors"
                               aria-label="ลบรายการ"
                             >
                               <Trash2 className="h-4 w-4" />
                             </button>
-                          </div>
-
-                          <div className="text-sm text-gray-500 mb-2">
+                          </div>                          <div className="text-sm text-gray-500 mb-2 mt-1 flex flex-wrap gap-1 sm:gap-2">
                             {item.size && (
-                              <span className="mr-3">ขนาด: {item.size}</span>
+                              <span className="inline-flex items-center bg-gray-50 px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-md text-xs font-medium">ขนาด: {item.size}</span>
                             )}
-                            {item.color && <span>สี: {item.color}</span>}
-                          </div>
-
-                          <div className="mt-auto flex justify-between items-center">
-                            <div className="flex items-center border rounded-lg">                              <button
+                            {item.color && <span className="inline-flex items-center bg-gray-50 px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-md text-xs font-medium">สี: {item.color}</span>}
+                          </div>                          <div className="mt-auto flex flex-col sm:flex-row gap-2 sm:gap-0 sm:justify-between sm:items-center">
+                            <div className="flex items-center border rounded-lg shadow-sm overflow-hidden w-fit">
+                              <button
                                 onClick={() =>
                                   updateQuantity(
                                     item.id,
@@ -175,12 +166,12 @@ const CartComponent = () => {
                                     item.color
                                   )
                                 }
-                                className="p-1 hover:bg-gray-100"
+                                className="p-1.5 sm:p-2 bg-white hover:bg-gray-50 text-gray-500 hover:text-gray-700 transition-colors"
                                 aria-label="ลดจำนวน"
                               >
-                                <Minus className="h-4 w-4" />
+                                <Minus className="h-3 w-3" />
                               </button>
-                              <span className="px-2">{item.quantity}</span>
+                              <span className="px-2 sm:px-3 font-medium text-gray-800 bg-white text-sm">{item.quantity}</span>
                               <button
                                 onClick={() =>
                                   updateQuantity(
@@ -190,13 +181,13 @@ const CartComponent = () => {
                                     item.color
                                   )
                                 }
-                                className="p-1 hover:bg-gray-100"
+                                className="p-1.5 sm:p-2 bg-white hover:bg-gray-50 text-gray-500 hover:text-gray-700 transition-colors"
                                 aria-label="เพิ่มจำนวน"
                               >
-                                <Plus className="h-4 w-4" />
+                                <Plus className="h-3 w-3" />
                               </button>
                             </div>
-                            <div className="font-semibold">
+                            <div className="font-semibold bg-gray-50 px-2 sm:px-3 py-1 rounded-lg text-gray-800 text-sm sm:text-base w-fit sm:w-auto self-end sm:self-auto">
                               ฿{(item.price * item.quantity).toLocaleString()}
                             </div>
                           </div>
@@ -205,55 +196,53 @@ const CartComponent = () => {
                     ))}
                   </div>
                 )}
-              </div>
-
-              {/* Footer */}
+              </div>              {/* Footer */}
               {cartItems.length > 0 && (
-                <div className="border-t p-4 space-y-4">
+                <div className="border-t border-gray-100 p-3 sm:p-4 md:p-5 space-y-3 sm:space-y-4 md:space-y-5 bg-gradient-to-b from-gray-50/50 to-white">
                   {/* Total */}
-                  <div className="flex justify-between items-center">
-                    <span className="font-semibold text-lg">รวมทั้งสิ้น</span>
-                    <span className="font-bold text-xl">
+                  <div className="flex justify-between items-center bg-white p-3 sm:p-4 rounded-xl shadow-sm border border-gray-50">
+                    <span className="font-semibold text-base sm:text-lg text-gray-800">รวมทั้งสิ้น</span>
+                    <span className="font-bold text-lg sm:text-xl text-gray-900">
                       ฿{getCartTotal().toLocaleString()}
                     </span>
                   </div>
 
-                  {/* Order Code Section */}
-                  <div className="bg-gray-50 rounded-xl p-4">
-                    <h4 className="font-semibold text-gray-900 mb-2">
+                  {/* Order Code Section */}                  <div className="bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl p-3 sm:p-4 shadow-sm">
+                    <h4 className="font-semibold text-gray-900 mb-2 sm:mb-3 flex items-center text-sm sm:text-base">
+                      <Copy className="h-3 w-3 sm:h-4 sm:w-4 mr-1.5 sm:mr-2 opacity-70" />
                       โค้ดสั่งซื้อ:
                     </h4>
-                    <div className="bg-white rounded-lg p-3 border text-sm">
-                      <pre className="whitespace-pre-wrap text-gray-700 max-h-48 overflow-y-auto">
+                    <p className="text-xs text-blue-600 mb-2">
+                      คัดลอกโค้ดนี้แล้วแอดไลน์ <strong>@teecrafted</strong> เพื่อส่งคำสั่งซื้อ
+                    </p>
+                    <div className="bg-white/80 backdrop-blur-sm rounded-lg p-2.5 sm:p-4 border border-gray-100 shadow-inner">
+                      <pre className="whitespace-pre-wrap text-gray-700 max-h-32 sm:max-h-48 overflow-y-auto text-xs sm:text-sm">
                         {generateOrderCode()}
                       </pre>
                     </div>
-                  </div>
-
-                  {/* Action Buttons */}
-                  <div className="grid grid-cols-2 gap-3">
+                  </div>{/* Action Buttons */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
                     <button
                       onClick={copyOrderCode}
-                      className="bg-blue-600 text-white py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors flex items-center justify-center space-x-2"
+                      className="bg-gradient-to-r from-blue-500 to-blue-600 text-white py-2.5 sm:py-3 rounded-xl text-sm sm:text-base font-medium hover:from-blue-600 hover:to-blue-700 transition-all shadow-sm hover:shadow flex items-center justify-center space-x-1.5 sm:space-x-2"
                     >
-                      <Copy className="h-4 w-4" />
+                      <Copy className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
                       <span>{copied ? "คัดลอกแล้ว!" : "คัดลอกโค้ด"}</span>
                     </button>
                     <button
                       onClick={openLineWithOrder}
-                      className="bg-green-500 text-white py-3 rounded-lg font-medium hover:bg-green-600 transition-colors flex items-center justify-center space-x-2"
-                    >
-                      <MessageCircle className="h-4 w-4" />
-                      <span>เปิด LINE</span>
+                      className="bg-gradient-to-r from-green-500 to-green-600 text-white py-2.5 sm:py-3 rounded-xl text-sm sm:text-base font-medium hover:from-green-600 hover:to-green-700 transition-all shadow-sm hover:shadow flex items-center justify-center space-x-1.5 sm:space-x-2"
+                    >                      <MessageCircle className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+                      <span>เปิด LINE พร้อมข้อความสั่งซื้อ</span>
                     </button>
                   </div>
 
                   {/* Clear Cart */}
                   <button
                     onClick={clearCart}
-                    className="w-full border border-red-300 text-red-600 py-2 rounded-lg font-medium hover:bg-red-50 transition-colors flex items-center justify-center space-x-2"
+                    className="w-full border border-red-200 text-red-600 py-2.5 sm:py-3 rounded-xl text-sm sm:text-base font-medium hover:bg-red-50/80 transition-colors flex items-center justify-center space-x-1.5 sm:space-x-2"
                   >
-                    <Trash2 className="h-4 w-4" />
+                    <Trash2 className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
                     <span>ล้างตะกร้า</span>
                   </button>
                 </div>
