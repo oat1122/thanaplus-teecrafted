@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import ProductCard from "@/components/ProductCard";
-import EnhancedSEOContentSection from "@/components/EnhancedSEOSection";
+import EnhancedSEOContentSection from "@/components/EnhancedSEOSection-minimal";
 import { products } from "@/data/products";
 import Link from "next/link";
 import {
