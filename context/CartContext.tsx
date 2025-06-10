@@ -39,28 +39,35 @@ const CartContext = createContext<CartContextType | undefined>(undefined);
 export function CartProvider({ children }: { children: ReactNode }) {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [isInitialized, setIsInitialized] = useState(false);
 
   // Initialize cart from localStorage when the component mounts (client-side only)
   useEffect(() => {
-    const storedCart = localStorage.getItem("cart");
-    if (storedCart) {
-      try {
-        setCartItems(JSON.parse(storedCart));
-      } catch (error) {
-        console.error("Failed to parse cart from localStorage:", error);
+    // This ensures we only run this on client side
+    if (typeof window !== 'undefined') {
+      const storedCart = localStorage.getItem("cart");
+      if (storedCart) {
+        try {
+          setCartItems(JSON.parse(storedCart));
+        } catch (error) {
+          console.error("Failed to parse cart from localStorage:", error);
+          localStorage.removeItem("cart");
+        }
+      }
+      setIsInitialized(true);
+    }
+  }, []);
+  // Save cart to localStorage whenever it changes
+  useEffect(() => {
+    // Only save to localStorage after initialization and on client-side
+    if (isInitialized && typeof window !== 'undefined') {
+      if (cartItems.length > 0) {
+        localStorage.setItem("cart", JSON.stringify(cartItems));
+      } else {
         localStorage.removeItem("cart");
       }
     }
-  }, []);
-
-  // Save cart to localStorage whenever it changes
-  useEffect(() => {
-    if (cartItems.length > 0) {
-      localStorage.setItem("cart", JSON.stringify(cartItems));
-    } else {
-      localStorage.removeItem("cart");
-    }
-  }, [cartItems]);  // Add an item to cart with options to replace or increment quantity
+  }, [cartItems, isInitialized]);// Add an item to cart with options to replace or increment quantity
   const addToCart = (
     product: Product,
     quantity: number,

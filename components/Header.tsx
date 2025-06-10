@@ -1,12 +1,19 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { FaShoppingBag, FaBars, FaTshirt } from "react-icons/fa";
 import { useCart } from "@/context/CartContext";
 
 const Header = () => {
   const { getCartItemCount, setIsCartOpen } = useCart();
+  const [mounted, setMounted] = useState(false);
+
+  // Only render cart counter after first mount to avoid hydration issues
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   return (
     <header className="border-b border-gray-100 sticky top-0 z-50 backdrop-blur-sm bg-white/95">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -46,13 +53,12 @@ const Header = () => {
               ติดต่อเรา
             </Link>
           </nav>          {/* Right side actions */}
-          <div className="flex items-center space-x-2">
-            <button 
+          <div className="flex items-center space-x-2">            <button 
               onClick={() => setIsCartOpen(true)}
               className="p-3 text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-lg transition-colors relative"
             >
               <FaShoppingBag className="w-5 h-5" />
-              {getCartItemCount() > 0 && (
+              {mounted && getCartItemCount() > 0 && (
                 <span className="absolute -top-1 -right-1 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold">
                   {getCartItemCount()}
                 </span>

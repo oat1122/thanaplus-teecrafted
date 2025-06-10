@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useCart } from "@/context/CartContext";
 import {
   ShoppingCart,
@@ -18,6 +18,7 @@ import CopyFallbackModal from "./CopyFallbackModal";
 const CartComponent = () => {
   const [copied, setCopied] = useState(false);
   const [showFallbackModal, setShowFallbackModal] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const {
     cartItems,
     isCartOpen,
@@ -28,7 +29,12 @@ const CartComponent = () => {
     getCartTotal,
     getCartItemCount,
     generateOrderCode,
-  } = useCart();  // Handle copy order code to clipboard
+  } = useCart();
+  
+  // Only render after first mount to avoid hydration issues
+  useEffect(() => {
+    setMounted(true);
+  }, []);// Handle copy order code to clipboard
   const copyOrderCode = async () => {
     try {
       const { copyToClipboard } = await import('@/utils/clipboard');
@@ -49,7 +55,9 @@ const CartComponent = () => {
       orderCode
     )}`;
     window.open(lineUrl, "_blank");
-  };
+  };  // If not yet mounted, don't render anything to avoid hydration errors
+  if (!mounted) return null;
+  
   return (
     <>
       {/* Fallback Copy Modal */}

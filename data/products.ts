@@ -23,18 +23,7 @@ export const products: Product[] = [
     sizes: ["S", "M", "L", "XL", "XXL"],
     colors: ["ขาว", "ดำ", "เทา"],
   },
-  {
-    id: 2,
-    name: "เสื้อยืดพื้นดำ Classic",
-    price: 299,
-    image:
-      "https://images.unsplash.com/photo-1583743089457-b1ff64694439?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-    featured: true,
-    category: "เสื้อยืด",
-    description: "เสื้อยืดสีดำคลาสสิก ใส่สบาย",
-    sizes: ["S", "M", "L", "XL", "XXL"],
-    colors: ["ดำ", "ขาว", "กรม"],
-  },
+
   {
     id: 3,
     name: "เสื้อโปโลสีน้ำเงิน",
@@ -101,7 +90,7 @@ export const products: Product[] = [
     price: 319,
     image:
       "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-    featured: false,
+    featured: true,
     category: "เสื้อยืด",
     description: "เสื้อยืดคอวีแฟชั่น ใส่แล้วดูดี",
     sizes: ["S", "M", "L", "XL"],
