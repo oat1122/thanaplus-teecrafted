@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { CartProvider } from "@/context/CartContext";
+import CartComponent from "@/components/CartComponent";
 import "./globals.css";
 import "./custom-animations-minimal.css";
 
@@ -188,8 +190,7 @@ export default function RootLayout({
           crossOrigin="anonymous"
         />
         <link rel="preconnect" href="https://images.unsplash.com" />
-      </head>
-      <body
+      </head>      <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {/* Google Tag Manager (noscript) */}
@@ -201,7 +202,10 @@ export default function RootLayout({
             style={{ display: "none", visibility: "hidden" }}
           />
         </noscript>
-        {children}
+        <CartProvider>
+          {children}
+          <CartComponent />
+        </CartProvider>
       </body>
     </html>
   );

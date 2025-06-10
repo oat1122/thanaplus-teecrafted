@@ -9,19 +9,10 @@ import {
   RotateCcw,
   Copy,
   MessageCircle,
+  Check,
 } from "lucide-react";
-
-interface Product {
-  id: number;
-  name: string;
-  description?: string;
-  price: number;
-  image: string;
-  category: string;
-  featured?: boolean;
-  sizes?: string[];
-  colors?: string[];
-}
+import { useCart } from "@/context/CartContext";
+import { Product } from "@/data/products";
 
 interface ProductDetailClientProps {
   product: Product;
@@ -33,6 +24,8 @@ const ProductDetailClient = ({ product }: ProductDetailClientProps) => {
   const [quantity, setQuantity] = useState(1);
   const [showOrderCode, setShowOrderCode] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [addedToCart, setAddedToCart] = useState(false);
+  const { addToCart } = useCart();
 
   // Generate LINE order code
   const generateOrderCode = () => {
@@ -174,11 +167,15 @@ Link: ${baseUrl}/product/${product.id}`;
               กรุณาเลือกขนาดและสีก่อนสร้างโค้ดสั่งซื้อ
             </p>
           </div>
-        )}
-
-        <button
+        )}        <button
           onClick={() => {
             if (selectedSize && selectedColor) {
+              // Add to cart
+              addToCart(product, quantity, selectedSize, selectedColor);
+              setAddedToCart(true);
+              setTimeout(() => setAddedToCart(false), 2000);
+              
+              // Show order code
               setShowOrderCode(!showOrderCode);
             } else {
               setShowOrderCode(true);
@@ -186,8 +183,17 @@ Link: ${baseUrl}/product/${product.id}`;
           }}
           className="w-full bg-gray-900 text-white py-4 rounded-xl font-semibold text-lg hover:bg-gray-800 transition-colors flex items-center justify-center space-x-2"
         >
-          <ShoppingCart className="h-5 w-5" />
-          <span>สร้างโค้ดสั่งซื้อ</span>
+          {addedToCart ? (
+            <>
+              <Check className="h-5 w-5" />
+              <span>เพิ่มลงตะกร้าแล้ว!</span>
+            </>
+          ) : (
+            <>
+              <ShoppingCart className="h-5 w-5" />
+              <span>สร้างโค้ดสั่งซื้อ ลงตะกร้า</span>
+            </>
+          )}
         </button>
 
         {showOrderCode && selectedSize && selectedColor && (
