@@ -110,10 +110,9 @@ const CartComponent = () => {
                     </Link>
                   </div>
                 ) : (
-                  <div className="space-y-4">
-                    {cartItems.map((item) => (
+                  <div className="space-y-4">                    {cartItems.map((item) => (
                       <div
-                        key={`${item.id}-${item.size}-${item.color}`}
+                        key={`${item.id}-${item.size || 'default'}-${item.color || 'default'}`}
                         className="flex border rounded-lg overflow-hidden"
                       >
                         {/* Image */}
@@ -132,9 +131,8 @@ const CartComponent = () => {
                           <div className="flex justify-between">
                             <h3 className="font-medium text-gray-900">
                               {item.name}
-                            </h3>
-                            <button
-                              onClick={() => removeFromCart(item.id)}
+                            </h3>                            <button
+                              onClick={() => removeFromCart(item.id, item.size, item.color)}
                               className="text-gray-400 hover:text-red-500"
                               aria-label="ลบรายการ"
                             >
@@ -150,12 +148,13 @@ const CartComponent = () => {
                           </div>
 
                           <div className="mt-auto flex justify-between items-center">
-                            <div className="flex items-center border rounded-lg">
-                              <button
+                            <div className="flex items-center border rounded-lg">                              <button
                                 onClick={() =>
                                   updateQuantity(
                                     item.id,
-                                    Math.max(1, item.quantity - 1)
+                                    Math.max(1, item.quantity - 1),
+                                    item.size,
+                                    item.color
                                   )
                                 }
                                 className="p-1 hover:bg-gray-100"
@@ -166,7 +165,12 @@ const CartComponent = () => {
                               <span className="px-2">{item.quantity}</span>
                               <button
                                 onClick={() =>
-                                  updateQuantity(item.id, item.quantity + 1)
+                                  updateQuantity(
+                                    item.id, 
+                                    item.quantity + 1,
+                                    item.size,
+                                    item.color
+                                  )
                                 }
                                 className="p-1 hover:bg-gray-100"
                                 aria-label="เพิ่มจำนวน"

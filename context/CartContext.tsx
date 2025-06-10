@@ -23,10 +23,11 @@ interface CartContextType {
     product: Product,
     quantity: number,
     size?: string,
-    color?: string
+    color?: string,
+    replaceQuantity?: boolean
   ) => void;
-  removeFromCart: (id: number) => void;
-  updateQuantity: (id: number, quantity: number) => void;
+  removeFromCart: (id: number, size?: string, color?: string) => void;
+  updateQuantity: (id: number, quantity: number, size?: string, color?: string) => void;
   clearCart: () => void;
   getCartTotal: () => number;
   getCartItemCount: () => number;
@@ -59,14 +60,13 @@ export function CartProvider({ children }: { children: ReactNode }) {
     } else {
       localStorage.removeItem("cart");
     }
-  }, [cartItems]);
-
-  // Add an item to cart
+  }, [cartItems]);  // Add an item to cart with options to replace or increment quantity
   const addToCart = (
     product: Product,
     quantity: number,
     size?: string,
-    color?: string
+    color?: string,
+    replaceQuantity: boolean = true
   ) => {
     setCartItems((prevItems) => {
       // Check if the item already exists in the cart with the same size and color
@@ -78,7 +78,13 @@ export function CartProvider({ children }: { children: ReactNode }) {
       if (existingItemIndex > -1) {
         // Update the quantity of the existing item
         const updatedItems = [...prevItems];
-        updatedItems[existingItemIndex].quantity += quantity;
+        if (replaceQuantity) {
+          // Replace quantity with the new value
+          updatedItems[existingItemIndex].quantity = quantity;
+        } else {
+          // Add the new quantity to the existing one
+          updatedItems[existingItemIndex].quantity += quantity;
+        }
         return updatedItems;
       } else {
         // Add new item to cart
@@ -86,18 +92,36 @@ export function CartProvider({ children }: { children: ReactNode }) {
       }
     });
   };
-
-  // Remove an item from cart
-  const removeFromCart = (id: number) => {
-    setCartItems((prevItems) => prevItems.filter((item) => item.id !== id));
+  // Remove an item from cart, considering size and color
+  const removeFromCart = (id: number, size?: string, color?: string) => {
+    setCartItems((prevItems) => 
+      prevItems.filter((item) => {
+        // If size and color are provided, filter by all criteria
+        if (size !== undefined && color !== undefined) {
+          return !(item.id === id && item.size === size && item.color === color);
+        }
+        // Otherwise, just filter by ID (backwards compatibility)
+        return item.id !== id;
+      })
+    );
   };
 
-  // Update quantity of an item
-  const updateQuantity = (id: number, quantity: number) => {
+  // Update quantity of an item, considering size and color
+  const updateQuantity = (id: number, quantity: number, size?: string, color?: string) => {
     if (quantity < 1) return;
 
     setCartItems((prevItems) =>
-      prevItems.map((item) => (item.id === id ? { ...item, quantity } : item))
+      prevItems.map((item) => {
+        // If size and color are provided, update only the specific item
+        if (size !== undefined && color !== undefined) {
+          if (item.id === id && item.size === size && item.color === color) {
+            return { ...item, quantity };
+          }
+          return item;
+        }
+        // Otherwise, update by ID (backwards compatibility)
+        return item.id === id ? { ...item, quantity } : item;
+      })
     );
   };
 

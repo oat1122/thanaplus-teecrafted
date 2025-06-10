@@ -170,12 +170,7 @@ Link: ${baseUrl}/product/${product.id}`;
         )}        <button
           onClick={() => {
             if (selectedSize && selectedColor) {
-              // Add to cart
-              addToCart(product, quantity, selectedSize, selectedColor);
-              setAddedToCart(true);
-              setTimeout(() => setAddedToCart(false), 2000);
-              
-              // Show order code
+              // Only show order code, don't add to cart
               setShowOrderCode(!showOrderCode);
             } else {
               setShowOrderCode(true);
@@ -183,34 +178,47 @@ Link: ${baseUrl}/product/${product.id}`;
           }}
           className="w-full bg-gray-900 text-white py-4 rounded-xl font-semibold text-lg hover:bg-gray-800 transition-colors flex items-center justify-center space-x-2"
         >
-          {addedToCart ? (
-            <>
-              <Check className="h-5 w-5" />
-              <span>เพิ่มลงตะกร้าแล้ว!</span>
-            </>
-          ) : (
-            <>
-              <ShoppingCart className="h-5 w-5" />
-              <span>สร้างโค้ดสั่งซื้อ ลงตะกร้า</span>
-            </>
-          )}
+          <ShoppingCart className="h-5 w-5" />
+          <span>สร้างโค้ดสั่งซื้อ</span>
         </button>
 
         {showOrderCode && selectedSize && selectedColor && (
-          <div className="bg-gray-50 rounded-xl p-4 space-y-4">
-            <h4 className="font-semibold text-gray-900">โค้ดสั่งซื้อ LINE:</h4>
+          <div className="bg-gray-50 rounded-xl p-4 space-y-4">            <h4 className="font-semibold text-gray-900">โค้ดสั่งซื้อ LINE:</h4>
             <div className="bg-white rounded-lg p-4 border text-sm">
               <pre className="whitespace-pre-wrap text-gray-700">
                 {generateOrderCode()}
               </pre>
             </div>
-            <div className="flex space-x-2">
+            <div className="flex justify-end mt-2">
               <button
                 onClick={copyOrderCode}
+                className="bg-gray-200 text-gray-800 py-2 px-3 rounded-lg text-sm hover:bg-gray-300 transition-colors flex items-center space-x-1"
+              >
+                <Copy className="h-3 w-3" />
+                <span>{copied ? "คัดลอกแล้ว!" : "คัดลอกโค้ด"}</span>
+              </button>
+            </div><div className="flex space-x-2">              <button
+                onClick={() => {
+                  if (selectedSize && selectedColor) {
+                    // Add to cart with replaceQuantity=true to replace existing item quantity
+                    addToCart(product, quantity, selectedSize, selectedColor, true);
+                    setAddedToCart(true);
+                    setTimeout(() => setAddedToCart(false), 2000);
+                  }
+                }}
                 className="flex-1 bg-blue-600 text-white py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors flex items-center justify-center space-x-2"
               >
-                <Copy className="h-4 w-4" />
-                <span>{copied ? "คัดลอกแล้ว!" : "คัดลอกโค้ด"}</span>
+                {addedToCart ? (
+                  <>
+                    <Check className="h-4 w-4" />
+                    <span>เพิ่มลงตะกร้าแล้ว!</span>
+                  </>
+                ) : (
+                  <>
+                    <ShoppingCart className="h-4 w-4" />
+                    <span>เพิ่มลงตะกร้า</span>
+                  </>
+                )}
               </button>
               <button
                 onClick={openLineWithOrder}
