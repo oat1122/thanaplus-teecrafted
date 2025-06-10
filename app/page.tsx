@@ -1,11 +1,13 @@
-import React from "react";
-import type { Metadata } from "next";
+"use client";
+
+import React, { useEffect } from "react";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import ProductCard from "@/components/ProductCard";
 import EnhancedSEOContentSection from "@/components/EnhancedSEOSection";
 import { products } from "@/data/products";
 import Link from "next/link";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import {
   FaBox,
   FaDollarSign,
@@ -23,61 +25,11 @@ import {
 } from "react-icons/fa";
 import { MdLocalShipping, MdDesignServices } from "react-icons/md";
 
-export const metadata: Metadata = {
-  title:
-    "TeeCrafted - ขายส่งเสื้อยืด ขายส่งเสื้อสกรีนจำนวนมาก ราคาถูก | ส่งฟรีทั่วประเทศ",
-  description:
-    "ขายส่งเสื้อยืดและขายส่งเสื้อสกรีนจำนวนมาก ราคาถูก คุณภาพสูง รับสกรีนเสื้อยืดขั้นต่ำ 10 ตัว ส่งฟรีทั่วประเทศ รับประกันคุณภาพ สำหรับร้านค้า โรงเรียน บริษัท องค์กร",
-  keywords: [
-    "ขายส่งเสื้อยืด",
-    "ขายเสื้อยืดจำนวนมาก",
-    "ขายส่งเสื้อสกรีน",
-    "ขายส่งเสื้อสกรีนจำนวนมาก",
-    "เสื้อยืดขายส่ง",
-    "เสื้อสกรีนขายส่ง",
-    "เสื้อยืดราคาส่ง",
-    "เสื้อสกรีนราคาส่ง",
-    "สั่งเสื้อยืดจำนวนมาก",
-    "สั่งเสื้อสกรีนจำนวนมาก",
-    "เสื้อยืดโรงเรียน",
-    "เสื้อยืดบริษัท",
-    "เสื้อยืดองค์กร",
-    "เสื้อยืดกิจกรรม",
-    "เสื้อสกรีนลายตามสั่ง",
-    "ผลิตเสื้อยืดจำนวนมาก",
-  ],
-  openGraph: {
-    title: "TeeCrafted - ขายส่งเสื้อยืด ขายส่งเสื้อสกรีนจำนวนมาก ราคาถูก",
-    description:
-      "ขายส่งเสื้อยืดและขายส่งเสื้อสกรีนจำนวนมาก ราคาถูก คุณภาพสูง รับสกรีนเสื้อยืดขั้นต่ำ 10 ตัว ส่งฟรีทั่วประเทศ สำหรับร้านค้า โรงเรียน บริษัท",
-    type: "website",
-    url: "https://teecrafted.com",
-    siteName: "TeeCrafted",
-    locale: "th_TH",
-    images: [
-      {
-        url: "/og-image.jpg",
-        width: 1200,
-        height: 630,
-        alt: "TeeCrafted - ขายส่งเสื้อยืด ขายส่งเสื้อสกรีน",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "TeeCrafted - ขายส่งเสื้อยืด ขายส่งเสื้อสกรีนจำนวนมาก",
-    description:
-      "ขายส่งเสื้อยืดและขายส่งเสื้อสกรีนจำนวนมาก ราคาถูก คุณภาพสูง ส่งฟรีทั่วประเทศ",
-    creator: "@teecrafted",
-    images: ["/twitter-image.jpg"],
-  },
-  alternates: {
-    canonical: "https://teecrafted.com",
-  },
-};
-
 export default function HomePage() {
   const featuredProducts = products.filter((product) => product.featured);
+  
+  // Initialize scroll animation
+  useScrollAnimation();
 
   // Structured Data for Homepage
   const structuredData = {
@@ -223,77 +175,80 @@ export default function HomePage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbData) }}
-      />
-
-      <div className="min-h-screen bg-white">
+      />      <div className="min-h-screen bg-white">
         <Header />
         <Hero />
 
         {/* Enhanced SEO Content Section */}
-        <EnhancedSEOContentSection />
+        <div className="animate-fade-in" style={{ animationDuration: '1s' }}>
+          <EnhancedSEOContentSection />
+        </div>
 
         {/* Featured Products Section */}
         <section className="py-20 bg-white" aria-labelledby="featured-products">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-16 animate-fade-in">
+            <div className="text-center mb-16">
               <h1
                 id="featured-products"
-                className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4 text-balance"
+                className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4 text-balance animate-on-scroll opacity-0 animate-duration-800"
+                style={{ transitionDelay: '0.3s' }}
               >
                 ขายส่งเสื้อยืด ขายส่งเสื้อสกรีนจำนวนมาก
               </h1>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto text-balance">
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto text-balance animate-on-scroll translate-y-8 animate-duration-800"
+                 style={{ transitionDelay: '0.5s' }}>
                 ขายเสื้อยืดจำนวนมาก ราคาส่ง คุณภาพสูง เหมาะสำหรับร้านค้า
                 โรงเรียน บริษัท องค์กร รับสกรีนลายตามต้องการ ขั้นต่ำ 10 ตัว
                 ส่งฟรีทั่วประเทศ
               </p>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 animate-fade-in-up">
-              {featuredProducts.map((product) => (
-                <ProductCard key={product.id} product={product} />
+            </div>            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+              {featuredProducts.map((product, index) => (
+                <div key={product.id} className="animate-on-scroll opacity-0" style={{ transitionDelay: `${0.1 * (index + 1)}s` }}>
+                  <ProductCard product={product} />
+                </div>
               ))}
             </div>
 
-            <div className="text-center mt-12">
+            <div className="text-center mt-12 animate-on-scroll opacity-0" style={{ transitionDelay: '0.5s' }}>
               <Link
                 href="/collection"
-                className="btn-minimal bg-gray-900 text-white hover:bg-gray-800 inline-flex items-center justify-center text-lg"
+                className="btn-minimal bg-gray-900 text-white hover:bg-gray-800 inline-flex items-center justify-center text-lg animate-scale-in hover-lift"
                 aria-label="ดูขายส่งเสื้อยืดและเสื้อสกรีนทั้งหมด"
               >
                 ดูขายส่งเสื้อยืดทั้งหมด
               </Link>
             </div>
           </div>
-        </section>
-
-        {/* Wholesale Section */}
+        </section>        {/* Wholesale Section */}
         <section
           className="py-20 bg-gray-50"
           aria-labelledby="wholesale-section"
         >
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-16 animate-fade-in">
+            <div className="text-center mb-16">
               <h2
                 id="wholesale-section"
-                className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4 text-balance"
+                className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4 text-balance animate-on-scroll opacity-0"
+                style={{ transitionDelay: '0.1s' }}
               >
                 ขายส่งเสื้อยืด ขายส่งเสื้อสกรีนจำนวนมาก
               </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto text-balance">
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto text-balance animate-on-scroll translate-y-8"
+                 style={{ transitionDelay: '0.3s' }}>
                 เราเป็นผู้เชี่ยวชาญด้านขายส่งเสื้อยืดและขายส่งเสื้อสกรีนจำนวนมาก
                 ราคาส่งพิเศษ เหมาะสำหรับร้านค้า โรงเรียน บริษัท องค์กร
                 รับสั่งทำตั้งแต่ 10 ตัวขึ้นไป
               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12 animate-slide-in">
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
               {wholesaleFeatures.map((feature, index) => (
                 <div
                   key={index}
-                  className="card-minimal p-6 text-center hover-lift"
+                  className="card-minimal p-6 text-center hover-lift animate-on-scroll opacity-0"
+                  style={{ transitionDelay: `${0.1 * (index + 1)}s` }}
                 >
-                  <div className="w-16 h-16 bg-slate-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                  <div className="w-16 h-16 bg-slate-600 rounded-2xl flex items-center justify-center mx-auto mb-4 animate-soft-glow">
                     <feature.icon className="w-8 h-8 text-white" />
                   </div>
                   <h3 className="text-lg font-semibold text-gray-900 mb-2">
@@ -304,19 +259,19 @@ export default function HomePage() {
                   </p>
                 </div>
               ))}
-            </div>
-
-            {/* Pricing Table */}
-            <div className="text-center animate-fade-in-up">
+            </div>            {/* Pricing Table */}
+            <div className="text-center animate-on-scroll opacity-0" style={{ animationDuration: '1s', transitionDelay: '0.4s' }}>
               <div className="card-minimal p-8 max-w-4xl mx-auto">
-                <h3 className="text-2xl font-bold text-gray-900 mb-6">
+                <h3 className="text-2xl font-bold text-gray-900 mb-6"
+                    style={{ animationDuration: '0.6s' }}>
                   ตารางราคาขายส่งเสื้อยืด
                 </h3>
                 <div className="grid md:grid-cols-4 gap-4">
                   {priceRanges.map((range, index) => (
                     <div
                       key={index}
-                      className={`rounded-xl p-4 ${range.bgColor}`}
+                      className={`rounded-xl p-4 ${range.bgColor} animate-on-scroll opacity-0`}
+                      style={{ transitionDelay: `${0.2 * (index + 1) + 0.3}s` }}
                     >
                       <div className="text-sm text-gray-600 mb-1">
                         {range.range}
@@ -340,28 +295,28 @@ export default function HomePage() {
               </div>
             </div>
           </div>
-        </section>
-
-        {/* Categories Section */}
+        </section>        {/* Categories Section */}
         <section
           className="py-20 bg-white"
           aria-labelledby="product-categories"
         >
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-16 animate-fade-in">
+            <div className="text-center mb-16 animate-fade-in" style={{ animationDuration: '0.7s' }}>
               <h2
                 id="product-categories"
-                className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4 text-balance"
+                className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4 text-balance animate-on-scroll opacity-0"
+                style={{ animationDuration: '0.8s', transitionDelay: '0.2s' }}
               >
                 หมวดหมู่ขายส่งเสื้อยืดและเสื้อสกรีน
               </h2>
-              <p className="text-lg text-gray-600 max-w-3xl mx-auto text-balance">
+              <p className="text-lg text-gray-600 max-w-3xl mx-auto text-balance animate-on-scroll translate-y-8"
+                 style={{ animationDuration: '0.7s', transitionDelay: '0.3s' }}>
                 เลือกประเภทเสื้อที่ต้องการสำหรับขายส่งเสื้อยืดจำนวนมาก
                 ทั้งเสื้อยืด เสื้อโปโล เสื้อฮู้ด ราคาส่งพิเศษ คุณภาพพรีเมียม
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 animate-slide-in">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 animate-on-scroll opacity-0" style={{ animationDuration: '0.8s', transitionDelay: '0.4s' }}>
               {[
                 {
                   href: "/collection?category=เสื้อยืด",
@@ -388,7 +343,7 @@ export default function HomePage() {
                   price: "เริ่มต้น 199 บาท/ตัว",
                 },
               ].map((category, index) => (
-                <Link key={index} href={category.href} className="group">
+                <Link key={index} href={category.href} className="group animate-on-scroll opacity-0" style={{ transitionDelay: `${0.2 * (index + 1) + 0.3}s` }}>
                   <article className="relative overflow-hidden rounded-2xl aspect-square card-minimal hover-lift">
                     <img
                       src={category.image}
@@ -409,31 +364,32 @@ export default function HomePage() {
               ))}
             </div>
           </div>
-        </section>
-
-        {/* Benefits Section */}
+        </section>        {/* Benefits Section */}
         <section className="py-20 bg-gray-50" aria-labelledby="our-benefits">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-16 animate-fade-in">
+            <div className="text-center mb-16 animate-fade-in" style={{ animationDuration: '0.7s' }}>
               <h2
                 id="our-benefits"
-                className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4 text-balance"
+                className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4 text-balance animate-fade-in"
+                style={{ animationDuration: '0.8s', animationDelay: '0.1s' }}
               >
                 ทำไมต้องเลือก TeeCrafted สำหรับขายส่งเสื้อยืด
               </h2>
-              <p className="text-lg text-gray-600 max-w-3xl mx-auto text-balance">
+              <p className="text-lg text-gray-600 max-w-3xl mx-auto text-balance animate-fade-in-up"
+                 style={{ animationDuration: '0.8s', animationDelay: '0.3s' }}>
                 เราเป็นผู้เชี่ยวชาญด้านขายส่งเสื้อยืดและขายส่งเสื้อสกรีนจำนวนมาก
                 ให้ความสำคัญกับคุณภาพและการบริการที่ดีที่สุด
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 animate-slide-in">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               {benefits.map((benefit, index) => (
                 <div
                   key={index}
-                  className="text-center card-minimal p-6 hover-lift"
+                  className="text-center card-minimal p-6 hover-lift animate-on-scroll opacity-0"
+                  style={{ transitionDelay: `${0.15 * (index + 1)}s` }}
                 >
-                  <div className="w-16 h-16 bg-slate-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                  <div className="w-16 h-16 bg-slate-600 rounded-2xl flex items-center justify-center mx-auto mb-4 animate-soft-glow">
                     <benefit.icon className="w-8 h-8 text-white" />
                   </div>
                   <h3 className="text-lg font-semibold text-gray-900 mb-2">
@@ -446,19 +402,17 @@ export default function HomePage() {
               ))}
             </div>
           </div>
-        </section>
-
-        {/* CTA Section */}
+        </section>        {/* CTA Section */}
         <section className="py-20 bg-gray-900 text-white">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center animate-fade-in">
-            <h2 className="text-3xl sm:text-4xl font-bold mb-4 text-balance">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 className="text-3xl sm:text-4xl font-bold mb-4 text-balance animate-on-scroll opacity-0" style={{ transitionDelay: '0.1s' }}>
               พร้อมสั่งขายส่งเสื้อยืดจำนวนมากแล้วหรือยัง?
             </h2>
-            <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto text-balance">
+            <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto text-balance animate-on-scroll translate-y-8" style={{ transitionDelay: '0.3s' }}>
               ติดต่อเราวันนี้เพื่อขอใบเสนอราคาขายส่งเสื้อสกรีนพิเศษ
               รับส่วนลดสำหรับลูกค้าใหม่
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center animate-on-scroll opacity-0" style={{ transitionDelay: '0.5s' }}>
               <Link
                 href="tel:+66624977952"
                 className="btn-minimal bg-white text-gray-900 hover:bg-gray-100 inline-flex items-center justify-center text-lg"
