@@ -14,7 +14,7 @@ import {
 interface Product {
   id: number;
   name: string;
-  description: string;
+  description?: string;
   price: number;
   image: string;
   category: string;
@@ -79,9 +79,9 @@ Link: ${baseUrl}/product/${product.id}`;
         </span>
         <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
           {product.name}
-        </h1>
+        </h1>{" "}
         <p className="text-lg text-gray-600 leading-relaxed">
-          {product.description}
+          {product.description || "รายละเอียดสินค้า"}
         </p>
       </div>
 

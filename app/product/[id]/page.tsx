@@ -7,14 +7,15 @@ import ProductDetailClient from "./ProductDetailClient";
 import { products } from "@/data/products";
 
 interface PageProps {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }
 
 // Generate metadata for SEO
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
-  const product = products.find((p) => p.id === parseInt(params.id));
+  const { id } = await params;
+  const product = products.find((p) => p.id === parseInt(id));
 
   if (!product) {
     return {
@@ -79,8 +80,9 @@ export async function generateStaticParams() {
   }));
 }
 
-const ProductDetail = ({ params }: PageProps) => {
-  const product = products.find((p) => p.id === parseInt(params.id));
+const ProductDetail = async ({ params }: PageProps) => {
+  const { id } = await params;
+  const product = products.find((p) => p.id === parseInt(id));
 
   if (!product) {
     return (

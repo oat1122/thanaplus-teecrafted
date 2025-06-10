@@ -1,64 +1,57 @@
 import React from "react";
 import Link from "next/link";
+import { FaShoppingBag, FaBars, FaTshirt } from "react-icons/fa";
 
 const Header = () => {
   return (
-    <header className="bg-white shadow-sm sticky top-0 z-50">
+    <header className="border-b border-gray-100 sticky top-0 z-50 backdrop-blur-sm bg-white/95">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          <Link href="/" className="text-2xl font-bold text-gray-900">
-            TeeCrafted
+          {/* Logo */}
+          <Link href="/" className="flex items-center space-x-2 group">
+            <div className="w-8 h-8 bg-slate-600 rounded-lg flex items-center justify-center group-hover:bg-slate-700 transition-colors">
+              <FaTshirt className="w-4 h-4 text-white" />
+            </div>
+            <span className="text-2xl font-bold text-gray-900">TeeCrafted</span>
           </Link>
 
-          <nav className="hidden md:flex space-x-8">
-            <Link href="/" className="text-gray-700 hover:text-gray-900">
+          {/* Navigation */}
+          <nav className="hidden md:flex space-x-1">
+            <Link
+              href="/"
+              className="px-4 py-2 text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-lg transition-colors font-medium"
+            >
               หน้าแรก
             </Link>
             <Link
               href="/collection"
-              className="text-gray-700 hover:text-gray-900"
+              className="px-4 py-2 text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-lg transition-colors font-medium"
             >
               สินค้าทั้งหมด
             </Link>
-            <Link href="/about" className="text-gray-700 hover:text-gray-900">
+            <Link
+              href="/about"
+              className="px-4 py-2 text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-lg transition-colors font-medium"
+            >
               เกี่ยวกับเรา
             </Link>
-            <Link href="/contact" className="text-gray-700 hover:text-gray-900">
+            <Link
+              href="/contact"
+              className="px-4 py-2 text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-lg transition-colors font-medium"
+            >
               ติดต่อเรา
             </Link>
           </nav>
 
-          <div className="flex items-center space-x-4">
-            <button className="p-2 text-gray-700 hover:text-gray-900">
-              <svg
-                className="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
-                />
-              </svg>
+          {/* Right side actions */}
+          <div className="flex items-center space-x-2">
+            <button className="p-3 text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-lg transition-colors">
+              <FaShoppingBag className="w-5 h-5" />
             </button>
 
-            <button className="md:hidden p-2 text-gray-700 hover:text-gray-900">
-              <svg
-                className="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              </svg>
+            {/* Mobile menu button */}
+            <button className="md:hidden p-3 text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-lg transition-colors">
+              <FaBars className="w-5 h-5" />
             </button>
           </div>
         </div>
