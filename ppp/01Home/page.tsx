@@ -87,7 +87,8 @@ export default function HomePage() {
                 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4 text-balance animate-on-scroll opacity-0 animate-duration-800"
                 style={{ transitionDelay: '0.3s' }}
               >
-                {SITE_CONFIG.displayName} — เสื้อผ้าแฟชั่นผู้หญิง | เสื้อผ้าไปคาเฟ่ | เสื้อครอปผู้หญิง | เสื้อครอปผู้ชาย</h1>
+                {SITE_CONFIG.displayName} - {SITE_CONFIG.keywords.primary.join(", ")}
+              </h1>
               <p className="text-xl text-gray-600 max-w-3xl mx-auto text-balance animate-on-scroll translate-y-8 animate-duration-800"
                  style={{ transitionDelay: '0.5s' }}>
                 {SITE_CONFIG.description}
@@ -104,7 +105,7 @@ export default function HomePage() {
               <Link
                 href="/collection"
                 className="btn-minimal bg-gray-900 text-white hover:bg-gray-800 inline-flex items-center justify-center text-lg animate-scale-in hover-lift"
-                aria-label="ดูเสื้อผ้าแฟชั่นผู้หญิง เสื้อไปคาเฟ่ และเสื้อครอปทั้งหมด"
+                aria-label="ดูเสื้อผ้าแฟชั่นและเสื้อครอปทั้งหมด"
               >
                 ดูเสื้อผ้าแฟชั่นทั้งหมด
               </Link>
@@ -126,7 +127,9 @@ export default function HomePage() {
               </h2>
               <p className="text-xl text-gray-600 max-w-3xl mx-auto text-balance animate-on-scroll translate-y-8"
                  style={{ transitionDelay: '0.3s' }}>
-                เราคัดสรรเสื้อผ้าแฟชั่นผู้หญิง สไตล์เกาหลีและสตรีท เหมาะสำหรับใส่ไปคาเฟ่ ใส่ง่าย ถ่ายรูปสวย ราคาสบายกระเป๋า ครอบคลุมเสื้อครอปผู้หญิง/ผู้ชาย เสื้อยืดแฟชั่น เสื้อผ้าวินเทจ และเสื้อผ้าโอเวอร์ไซส์คุณภาพดี
+                เราคัดสรรเสื้อผ้าแฟชั่นคุณภาพ สไตล์เกาหลี โทนหวาน 
+                เหมาะสำหรับสายคาเฟ่ ใส่ง่าย ถ่ายรูปสวย ราคาสบายกระเป๋า
+                ทั้งแบบเสื้อครอปและเสื้อแฟชั่นทั่วไป
               </p>
             </div>
 
@@ -196,11 +199,12 @@ export default function HomePage() {
                 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4 text-balance animate-on-scroll opacity-0"
                 style={{ animationDuration: '0.8s', transitionDelay: '0.2s' }}
               >
-                หมวดหมู่เสื้อผ้าแฟชั่นผู้หญิงและเสื้อครอป
+                หมวดหมู่{SITE_CONFIG.keywords.primary[0]}และเสื้อครอป
               </h2>
               <p className="text-lg text-gray-600 max-w-3xl mx-auto text-balance animate-on-scroll translate-y-8"
                  style={{ animationDuration: '0.7s', transitionDelay: '0.3s' }}>
-                เลือกประเภทเสื้อผ้าแฟชั่นผู้หญิง เสื้อผ้าไปคาเฟ่ เสื้อครอปผู้หญิง/ผู้ชาย เสื้อยืดแฟชั่น เสื้อผ้าสตรีท วินเทจ และโอเวอร์ไซส์ คุณภาพพรีเมียม ราคาดี ส่งฟรีทั่วประเทศ
+                เลือกประเภทเสื้อผ้าแฟชั่นที่ต้องการ สไตล์เกาหลี โทนหวาน 
+                คุณภาพพรีเมียม ราคาดี ส่งฟรีทั่วประเทศ
               </p>
             </div>
 
@@ -242,7 +246,8 @@ export default function HomePage() {
               </h2>
               <p className="text-lg text-gray-600 max-w-3xl mx-auto text-balance animate-fade-in-up"
                  style={{ animationDuration: '0.8s', animationDelay: '0.3s' }}>
-                เราเน้นเสื้อผ้าแฟชั่นผู้หญิง เสื้อผ้าไปคาเฟ่ และเสื้อครอป ทั้งสไตล์เกาหลี สตรีท วินเทจ และโอเวอร์ไซส์ พร้อมคุณภาพและการบริการที่ดีที่สุด
+                เราคัดสรรเสื้อผ้าแฟชั่นคุณภาพ สไตล์เกาหลี โทนหวาน 
+                ให้ความสำคัญกับคุณภาพและการบริการที่ดีที่สุด
               </p>
             </div>
 
@@ -273,7 +278,7 @@ export default function HomePage() {
               พร้อมช้อปเสื้อผ้าแฟชั่นแล้วหรือยัง?
             </h2>
             <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto text-balance animate-on-scroll translate-y-8" style={{ transitionDelay: '0.3s' }}>
-              ติดต่อเราวันนี้เพื่อสั่งซื้อเสื้อผ้าแฟชั่นผู้หญิง เสื้อไปคาเฟ่ และเสื้อครอป รับส่วนลดสำหรับลูกค้าใหม่
+              ติดต่อเราวันนี้เพื่อสั่งซื้อเสื้อผ้าแฟชั่นสไตล์เกาหลี รับส่วนลดสำหรับลูกค้าใหม่
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center animate-on-scroll opacity-0" style={{ transitionDelay: '0.5s' }}>
               <Link
@@ -301,7 +306,8 @@ export default function HomePage() {
               <div>
                 <h3 className="text-2xl font-bold mb-4">{SITE_CONFIG.name}</h3>
                 <p className="text-gray-300 mb-4 leading-relaxed">
-                  คัดสรรเสื้อผ้าแฟชั่นผู้หญิง เสื้อครอป และเสื้อผ้าไปคาเฟ่ รวมถึงเสื้อยืดแฟชั่น เสื้อผ้าสตรีท วินเทจ และโอเวอร์ไซส์ คุณภาพสูง สไตล์เกาหลี ราคาดี ส่งฟรีทั่วประเทศ
+                  คัดสรรเสื้อผ้าแฟชั่นผู้หญิง เสื้อครอป และเสื้อผ้าไปคาเฟ่
+                  คุณภาพสูง สไตล์เกาหลี ราคาดี ส่งฟรีทั่วประเทศ
                 </p>
                 <div className="flex space-x-4">
                   <a
