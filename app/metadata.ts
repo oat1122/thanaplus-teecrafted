@@ -5,7 +5,7 @@ export const SITE_CONFIG = {
   name: "CafeWearTH",
   displayName: "CafeWearTH | เสื้อแท้.com",
   domain: "เสื้อแท้.com",
-  url: "https://เสื้อแท้.com", // Punycode for เสื้อแท้.com
+  url: "https://xn--o3c1bj3b4bj8cd.com", // Punycode for เสื้อแท้.com
   description: "เสื้อแท้.com ร้านเสื้อผ้าแฟชั่นผู้หญิง เสื้อไปคาเฟ่ เสื้อครอปผู้หญิง-ผู้ชาย โทนเกาหลี คุณภาพดี ใส่ง่าย ถ่ายรูปสวย ราคาสบายกระเป๋า",
   keywords: {
     primary: [
@@ -180,6 +180,151 @@ export const STRUCTURED_DATA = {
         name: "เสื้อครอปผู้ชาย",
         description: "ลุคสตรีท สปอร์ตแคชชวล ใส่ง่าย",
       },
+    },
+  ],
+};
+
+// Homepage Structured Data Schemas
+export const HOMEPAGE_STRUCTURED_DATA = {
+  website: {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: SITE_CONFIG.name,
+    url: SITE_CONFIG.url,
+    description: SITE_CONFIG.description,
+    potentialAction: {
+      "@type": "SearchAction",
+      target: `${SITE_CONFIG.url}/search?q={search_term_string}`,
+      "query-input": "required name=search_term_string",
+    },
+    offers: {
+      "@type": "AggregateOffer",
+      priceCurrency: SITE_CONFIG.pricing.currency,
+      lowPrice: SITE_CONFIG.pricing.lowPrice,
+      highPrice: SITE_CONFIG.pricing.highPrice,
+      offerCount: SITE_CONFIG.pricing.offerCount,
+      description: SITE_CONFIG.description,
+    },
+  },
+  organization: {
+    "@context": "https://schema.org",
+    "@type": "Store",
+    name: SITE_CONFIG.name,
+    description: SITE_CONFIG.description,
+    url: SITE_CONFIG.url,
+    logo: `${SITE_CONFIG.url}/logo/LoGo.png`,
+    address: {
+      "@type": "PostalAddress",
+      addressCountry: SITE_CONFIG.address.country,
+      addressRegion: SITE_CONFIG.address.region,
+    },
+    contactPoint: {
+      "@type": "ContactPoint",
+      telephone: SITE_CONFIG.phone,
+      contactType: "customer service",
+      areaServed: SITE_CONFIG.address.country,
+      availableLanguage: "Thai",
+    },
+    offers: {
+      "@type": "AggregateOffer",
+      priceCurrency: SITE_CONFIG.pricing.currency,
+      lowPrice: SITE_CONFIG.pricing.lowPrice,
+      highPrice: SITE_CONFIG.pricing.highPrice,
+      offerCount: SITE_CONFIG.pricing.offerCount,
+      description: SITE_CONFIG.description,
+    },
+    sameAs: [
+      `https://www.facebook.com/${SITE_CONFIG.social.facebook}`,
+      `https://line.me/ti/p/${SITE_CONFIG.social.instagram}`, // LINE ID
+    ],
+  },
+  breadcrumb: {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "หน้าแรก",
+        item: SITE_CONFIG.url,
+      },
+    ],
+  },
+};
+
+// Features และ Benefits สำหรับหน้า Homepage
+export const HOMEPAGE_CONTENT = {
+  features: [
+    {
+      title: "ขั้นต่ำ 10 ตัว",
+      description: `รับสั่งทำ${SITE_CONFIG.keywords.primary.join("และ")}ขั้นต่ำเพียง 10 ตัว ราคาส่งพิเศษ`,
+      icon: "FaBox"
+    },
+    {
+      title: "ราคาส่งพิเศษ", 
+      description: `${SITE_CONFIG.keywords.primary[0]} ยิ่งสั่งเยอะ ยิ่งถูก เริ่มต้น ${SITE_CONFIG.pricing.lowPrice} บาท/ตัว`,
+      icon: "FaDollarSign"
+    },
+    {
+      title: "สกรีนตามสั่ง",
+      description: "รับสกรีนลายตามต้องการ โลโก้บริษัท ชื่อโรงเรียน หรือดีไซน์ส่วนตัว",
+      icon: "FaPalette"
+    },
+    {
+      title: "ผลิตรวดเร็ว",
+      description: `${SITE_CONFIG.keywords.primary[1]} ${SITE_CONFIG.keywords.primary[2]} ผลิตเสร็จภายใน 5-7 วัน ส่งฟรีทั่วประเทศ`,
+      icon: "FaShippingFast"
+    },
+  ],
+  benefits: [
+    {
+      title: "คุณภาพสูง",
+      description: `วัสดุพรีเมียม สกรีนคมชัด ทนทาน เหมาะสำหรับ${SITE_CONFIG.keywords.primary.join("และ")}`,
+      icon: "FaCheckCircle"
+    },
+    {
+      title: "ส่งฟรีทั่วประเทศ", 
+      description: `${SITE_CONFIG.keywords.primary[1]} ส่งฟรี รวดเร็ว ปลอดภัย ได้ของตรงเวลา`,
+      icon: "FaTruck"
+    },
+    {
+      title: "รับประกันคุณภาพ",
+      description: "รับประกันคุณภาพทุกชิ้น เปลี่ยน-คืนได้ มั่นใจในการสั่งซื้อขายส่ง",
+      icon: "FaAward"
+    },
+    {
+      title: "ผลิตรวดเร็ว",
+      description: `ผลิตรวดเร็ว ส่งไว ได้ของตรงเวลา เหมาะสำหรับธุรกิจ${SITE_CONFIG.keywords.primary[0]}`,
+      icon: "FaClock"
+    },
+  ],
+  priceRanges: [
+    { range: "10-29 ตัว", price: "299 บาท", bgColor: "bg-gray-100" },
+    { range: "30-49 ตัว", price: "249 บาท", bgColor: "bg-gray-100" },
+    { range: "50-99 ตัว", price: "219 บาท", bgColor: "bg-gray-100" },
+    { range: "100+ ตัว", price: `${SITE_CONFIG.pricing.lowPrice} บาท`, bgColor: "bg-slate-100" },
+  ],
+  categories: [
+    {
+      href: "/collection?category=เสื้อครอปผู้หญิง",
+      image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+      alt: `${SITE_CONFIG.keywords.primary[2]} คุณภาพสูง ดีไซน์สวย ราคาดี`,
+      title: SITE_CONFIG.keywords.primary[2],
+      price: `เริ่มต้น ${SITE_CONFIG.pricing.lowPrice} บาท/ตัว`,
+    },
+    {
+      href: "/collection?category=เสื้อผ้าไปคาเฟ่",
+      image: "https://images.unsplash.com/photo-1586790170083-2f9ceadc732d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+      alt: `${SITE_CONFIG.keywords.primary[1]} ใส่สบาย ดูดี สไตล์เกาหลี`,
+      title: SITE_CONFIG.keywords.primary[1],
+      price: "เริ่มต้น 249 บาท/ตัว",
+    },
+    {
+      href: "/collection?category=เสื้อครอปผู้ชาย",
+      image: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+      alt: `${SITE_CONFIG.keywords.primary[3]} แฟชั่น สไตล์สตรีท ใส่เท่`,
+      title: SITE_CONFIG.keywords.primary[3],
+      price: "เริ่มต้น 299 บาท/ตัว",
     },
   ],
 };

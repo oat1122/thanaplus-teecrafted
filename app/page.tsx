@@ -6,6 +6,11 @@ import Hero from "@/components/Hero";
 import ProductCard from "@/components/ProductCard";
 import EnhancedSEOContentSection from "@/components/EnhancedSEOSection";
 import { products } from "@/data/products";
+import { 
+  SITE_CONFIG, 
+  HOMEPAGE_STRUCTURED_DATA, 
+  HOMEPAGE_CONTENT 
+} from "./metadata";
 import Link from "next/link";
 import Image from "next/image";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
@@ -30,135 +35,25 @@ export default function HomePage() {
   // Initialize scroll animation
   useScrollAnimation();
 
-  // Structured Data for Homepage
-  const structuredData = {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    name: "TeeCrafted",
-    url: "https://teecrafted.com",
-    description: "ขายส่งเสื้อยืดและขายส่งเสื้อสกรีนจำนวนมาก ราคาถูก คุณภาพสูง",
-    potentialAction: {
-      "@type": "SearchAction",
-      target: "https://teecrafted.com/search?q={search_term_string}",
-      "query-input": "required name=search_term_string",
-    },
-    offers: {
-      "@type": "AggregateOffer",
-      priceCurrency: "THB",
-      lowPrice: "99",
-      highPrice: "999",
-      offerCount: "100+",
-      description: "ขายส่งเสื้อยืดและเสื้อสกรีนจำนวนมาก",
-    },
-  };
+  // ใช้ Structured Data จาก metadata.ts
+  const structuredData = HOMEPAGE_STRUCTURED_DATA.website;
+  const organizationData = HOMEPAGE_STRUCTURED_DATA.organization;
+  const breadcrumbData = HOMEPAGE_STRUCTURED_DATA.breadcrumb;
 
-  // Organization Schema
-  const organizationData = {
-    "@context": "https://schema.org",
-    "@type": "Store",
-    name: "TeeCrafted",
-    description: "ขายส่งเสื้อยืดและขายส่งเสื้อสกรีนจำนวนมาก ราคาถูก คุณภาพสูง",
-    url: "https://teecrafted.com",
-    logo: "https://teecrafted.com/logo.png",
-    address: {
-      "@type": "PostalAddress",
-      addressCountry: "TH",
-      addressRegion: "Bangkok",
-    },
-    contactPoint: {
-      "@type": "ContactPoint",
-      telephone: "+66-62-497-7952",
-      contactType: "customer service",
-      areaServed: "TH",
-      availableLanguage: "Thai",
-    },
-    offers: {
-      "@type": "AggregateOffer",
-      priceCurrency: "THB",
-      lowPrice: "99",
-      highPrice: "999",
-      offerCount: "100+",
-      description: "ขายส่งเสื้อยืดและเสื้อสกรีนจำนวนมาก",
-    },
-    sameAs: [
-      "https://www.facebook.com/TeeCraftedThailand",
-      "https://line.me/ti/p/@teecrafted",
-    ],
-  };
+  // ใช้ Content จาก metadata.ts
+  const wholesaleFeatures = HOMEPAGE_CONTENT.features.map((feature, index) => ({
+    icon: [FaBox, FaDollarSign, FaPalette, FaShippingFast][index],
+    title: feature.title,
+    description: feature.description,
+  }));
 
-  const breadcrumbData = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
-        name: "หน้าแรก",
-        item: "https://teecrafted.com",
-      },
-    ],
-  };
+  const benefits = HOMEPAGE_CONTENT.benefits.map((benefit, index) => ({
+    icon: [FaCheckCircle, FaTruck, FaAward, FaClock][index],
+    title: benefit.title,
+    description: benefit.description,
+  }));
 
-  const wholesaleFeatures = [
-    {
-      icon: FaBox,
-      title: "ขั้นต่ำ 10 ตัว",
-      description:
-        "รับสั่งทำขายส่งเสื้อยืดและเสื้อสกรีนขั้นต่ำเพียง 10 ตัว ราคาส่งพิเศษ",
-    },
-    {
-      icon: FaDollarSign,
-      title: "ราคาส่งพิเศษ",
-      description:
-        "ขายเสื้อยืดจำนวนมาก ยิ่งสั่งเยอะ ยิ่งถูก เริ่มต้น 99 บาท/ตัว",
-    },
-    {
-      icon: FaPalette,
-      title: "สกรีนตามสั่ง",
-      description:
-        "รับสกรีนลายตามต้องการ โลโก้บริษัท ชื่อโรงเรียน หรือดีไซน์ส่วนตัว",
-    },
-    {
-      icon: FaShippingFast,
-      title: "ผลิตรวดเร็ว",
-      description:
-        "ขายส่งเสื้อสกรีนจำนวนมาก ผลิตเสร็จภายใน 5-7 วัน ส่งฟรีทั่วประเทศ",
-    },
-  ];
-
-  const benefits = [
-    {
-      icon: FaCheckCircle,
-      title: "คุณภาพสูง",
-      description:
-        "วัสดุพรีเมียม สกรีนคมชัด ทนทาน เหมาะสำหรับขายส่งเสื้อยืดจำนวนมาก",
-    },
-    {
-      icon: FaTruck,
-      title: "ส่งฟรีทั่วประเทศ",
-      description:
-        "ขายส่งเสื้อสกรีนจำนวนมาก ส่งฟรี รวดเร็ว ปลอดภัย ได้ของตรงเวลา",
-    },
-    {
-      icon: FaAward,
-      title: "รับประกันคุณภาพ",
-      description:
-        "รับประกันคุณภาพทุกชิ้น เปลี่ยน-คืนได้ มั่นใจในการสั่งซื้อขายส่ง",
-    },
-    {
-      icon: FaClock,
-      title: "ผลิตรวดเร็ว",
-      description:
-        "ผลิตรวดเร็ว ส่งไว ได้ของตรงเวลา เหมาะสำหรับธุรกิจขายส่งเสื้อยืด",
-    },
-  ];
-
-  const priceRanges = [
-    { range: "10-29 ตัว", price: "149 บาท", bgColor: "bg-gray-100" },
-    { range: "30-49 ตัว", price: "129 บาท", bgColor: "bg-gray-100" },
-    { range: "50-99 ตัว", price: "109 บาท", bgColor: "bg-gray-100" },
-    { range: "100+ ตัว", price: "99 บาท", bgColor: "bg-slate-100" },
-  ];
+  const priceRanges = HOMEPAGE_CONTENT.priceRanges;
 
   return (
     <>
@@ -192,13 +87,11 @@ export default function HomePage() {
                 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4 text-balance animate-on-scroll opacity-0 animate-duration-800"
                 style={{ transitionDelay: '0.3s' }}
               >
-                ขายส่งเสื้อยืด ขายส่งเสื้อสกรีนจำนวนมาก
+                {SITE_CONFIG.displayName} - {SITE_CONFIG.keywords.primary.join(", ")}
               </h1>
               <p className="text-xl text-gray-600 max-w-3xl mx-auto text-balance animate-on-scroll translate-y-8 animate-duration-800"
                  style={{ transitionDelay: '0.5s' }}>
-                ขายเสื้อยืดจำนวนมาก ราคาส่ง คุณภาพสูง เหมาะสำหรับร้านค้า
-                โรงเรียน บริษัท องค์กร รับสกรีนลายตามต้องการ ขั้นต่ำ 10 ตัว
-                ส่งฟรีทั่วประเทศ
+                {SITE_CONFIG.description}
               </p>
             </div>            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
               {featuredProducts.map((product, index) => (
@@ -230,11 +123,11 @@ export default function HomePage() {
                 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4 text-balance animate-on-scroll opacity-0"
                 style={{ transitionDelay: '0.1s' }}
               >
-                ขายส่งเสื้อยืด ขายส่งเสื้อสกรีนจำนวนมาก
+                {SITE_CONFIG.keywords.primary.slice(0, 2).join(" และ ")}
               </h2>
               <p className="text-xl text-gray-600 max-w-3xl mx-auto text-balance animate-on-scroll translate-y-8"
                  style={{ transitionDelay: '0.3s' }}>
-                เราเป็นผู้เชี่ยวชาญด้านขายส่งเสื้อยืดและขายส่งเสื้อสกรีนจำนวนมาก
+                เราเป็นผู้เชี่ยวชาญด้าน{SITE_CONFIG.keywords.primary.join("และ")}
                 ราคาส่งพิเศษ เหมาะสำหรับร้านค้า โรงเรียน บริษัท องค์กร
                 รับสั่งทำตั้งแต่ 10 ตัวขึ้นไป
               </p>
@@ -263,7 +156,7 @@ export default function HomePage() {
               <div className="card-minimal p-8 max-w-4xl mx-auto">
                 <h3 className="text-2xl font-bold text-gray-900 mb-6"
                     style={{ animationDuration: '0.6s' }}>
-                  ตารางราคาขายส่งเสื้อยืด
+                  ตารางราคา{SITE_CONFIG.keywords.primary[0]}
                 </h3>
                 <div className="grid md:grid-cols-4 gap-4">
                   {priceRanges.map((range, index) => (
@@ -285,10 +178,10 @@ export default function HomePage() {
                 <p className="text-sm text-gray-600 mt-4">
                   *ราคาไม่รวมค่าสกรีน | สอบถามรายละเอียดเพิ่มเติม{" "}
                   <a
-                    href="tel:+66624977952"
+                    href={`tel:${SITE_CONFIG.phone}`}
                     className="text-slate-600 hover:text-slate-800 font-medium"
                   >
-                    062-497-7952
+                    {SITE_CONFIG.phone.replace('+66', '0').replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3')}
                   </a>
                 </p>
               </div>
@@ -306,42 +199,17 @@ export default function HomePage() {
                 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4 text-balance animate-on-scroll opacity-0"
                 style={{ animationDuration: '0.8s', transitionDelay: '0.2s' }}
               >
-                หมวดหมู่ขายส่งเสื้อยืดและเสื้อสกรีน
+                หมวดหมู่{SITE_CONFIG.keywords.primary[0]}และเสื้อแฟชั่น
               </h2>
               <p className="text-lg text-gray-600 max-w-3xl mx-auto text-balance animate-on-scroll translate-y-8"
                  style={{ animationDuration: '0.7s', transitionDelay: '0.3s' }}>
-                เลือกประเภทเสื้อที่ต้องการสำหรับขายส่งเสื้อยืดจำนวนมาก
-                ทั้งเสื้อยืด เสื้อโปโล เสื้อฮู้ด ราคาส่งพิเศษ คุณภาพพรีเมียม
+                เลือกประเภทเสื้อที่ต้องการสำหรับ{SITE_CONFIG.keywords.primary.join("และ")}
+                คุณภาพพรีเมียม ราคาดี ส่งฟรีทั่วประเทศ
               </p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 animate-on-scroll opacity-0" style={{ animationDuration: '0.8s', transitionDelay: '0.4s' }}>
-              {[
-                {
-                  href: "/collection?category=เสื้อยืด",
-                  image:
-                    "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
-                  alt: "ขายส่งเสื้อยืดสกรีน คุณภาพสูง ดีไซน์สวย ราคาส่งพิเศษ",
-                  title: "ขายส่งเสื้อยืด",
-                  price: "เริ่มต้น 99 บาท/ตัว",
-                },
-                {
-                  href: "/collection?category=เสื้อโปโล",
-                  image:
-                    "https://images.unsplash.com/photo-1586790170083-2f9ceadc732d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
-                  alt: "ขายส่งเสื้อโปโลสกรีน ใส่สบาย ดูดี ราคาส่งพิเศษ",
-                  title: "ขายส่งเสื้อโปโล",
-                  price: "เริ่มต้น 149 บาท/ตัว",
-                },
-                {
-                  href: "/collection?category=เสื้อฮู้ด",
-                  image:
-                    "https://images.unsplash.com/photo-1556821840-3a63f95609a7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
-                  alt: "ขายส่งเสื้อฮู้ดสกรีน แฟชั่น ใส่อุ่น ราคาส่งพิเศษ",
-                  title: "ขายส่งเสื้อฮู้ด",
-                  price: "เริ่มต้น 199 บาท/ตัว",
-                },
-              ].map((category, index) => (
+              {HOMEPAGE_CONTENT.categories.map((category, index) => (
                 <Link key={index} href={category.href} className="group animate-on-scroll opacity-0" style={{ transitionDelay: `${0.2 * (index + 1) + 0.3}s` }}>
                   <article className="relative overflow-hidden rounded-2xl aspect-square card-minimal hover-lift">
                     <Image
@@ -374,11 +242,11 @@ export default function HomePage() {
                 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4 text-balance animate-fade-in"
                 style={{ animationDuration: '0.8s', animationDelay: '0.1s' }}
               >
-                ทำไมต้องเลือก TeeCrafted สำหรับขายส่งเสื้อยืด
+                ทำไมต้องเลือก {SITE_CONFIG.name} สำหรับ{SITE_CONFIG.keywords.primary[0]}
               </h2>
               <p className="text-lg text-gray-600 max-w-3xl mx-auto text-balance animate-fade-in-up"
                  style={{ animationDuration: '0.8s', animationDelay: '0.3s' }}>
-                เราเป็นผู้เชี่ยวชาญด้านขายส่งเสื้อยืดและขายส่งเสื้อสกรีนจำนวนมาก
+                เราเป็นผู้เชี่ยวชาญด้าน{SITE_CONFIG.keywords.primary.join("และ")}
                 ให้ความสำคัญกับคุณภาพและการบริการที่ดีที่สุด
               </p>
             </div>
@@ -407,26 +275,25 @@ export default function HomePage() {
         <section className="py-20 bg-gray-900 text-white">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 className="text-3xl sm:text-4xl font-bold mb-4 text-balance animate-on-scroll opacity-0" style={{ transitionDelay: '0.1s' }}>
-              พร้อมสั่งขายส่งเสื้อยืดจำนวนมากแล้วหรือยัง?
+              พร้อมสั่ง{SITE_CONFIG.keywords.primary[0]}แล้วหรือยัง?
             </h2>
             <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto text-balance animate-on-scroll translate-y-8" style={{ transitionDelay: '0.3s' }}>
-              ติดต่อเราวันนี้เพื่อขอใบเสนอราคาขายส่งเสื้อสกรีนพิเศษ
-              รับส่วนลดสำหรับลูกค้าใหม่
+              ติดต่อเราวันนี้เพื่อขอใบเสนอราคาพิเศษ รับส่วนลดสำหรับลูกค้าใหม่
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center animate-on-scroll opacity-0" style={{ transitionDelay: '0.5s' }}>
               <Link
-                href="tel:+66624977952"
+                href={`tel:${SITE_CONFIG.phone}`}
                 className="btn-minimal bg-white text-gray-900 hover:bg-gray-100 inline-flex items-center justify-center text-lg"
               >
                 <FaPhoneAlt className="w-5 h-5 mr-2" />
-                โทรเลย 062-497-7952
+                โทรเลย {SITE_CONFIG.phone.replace('+66', '0').replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3')}
               </Link>
               <Link
-                href="https://line.me/ti/p/@teecrafted"
+                href={`https://line.me/ti/p/${SITE_CONFIG.social.instagram}`}
                 className="btn-minimal bg-green-600 text-white hover:bg-green-700 inline-flex items-center justify-center text-lg"
               >
                 <FaCommentDots className="w-5 h-5 mr-2" />
-                แชท LINE @teecrafted
+                แชท LINE {SITE_CONFIG.social.instagram}
               </Link>
             </div>
           </div>
@@ -437,21 +304,21 @@ export default function HomePage() {
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
               <div>
-                <h3 className="text-2xl font-bold mb-4">TeeCrafted</h3>
+                <h3 className="text-2xl font-bold mb-4">{SITE_CONFIG.name}</h3>
                 <p className="text-gray-300 mb-4 leading-relaxed">
-                  ผู้เชี่ยวชาญด้านขายส่งเสื้อยืดและขายส่งเสื้อสกรีนจำนวนมาก
-                  คุณภาพสูง ราคาส่งพิเศษ ส่งฟรีทั่วประเทศ
+                  ผู้เชี่ยวชาญด้าน{SITE_CONFIG.keywords.primary.join("และ")}
+                  คุณภาพสูง ราคาดี ส่งฟรีทั่วประเทศ
                 </p>
                 <div className="flex space-x-4">
                   <a
-                    href="https://www.facebook.com/TeeCraftedThailand"
+                    href={`https://www.facebook.com/${SITE_CONFIG.social.facebook}`}
                     className="w-10 h-10 bg-slate-700 rounded-lg flex items-center justify-center hover:bg-slate-600 transition-colors"
                     aria-label="Facebook"
                   >
                     <FaFacebookF className="w-5 h-5" />
                   </a>
                   <a
-                    href="https://line.me/ti/p/@teecrafted"
+                    href={`https://line.me/ti/p/${SITE_CONFIG.social.instagram}`}
                     className="w-10 h-10 bg-slate-700 rounded-lg flex items-center justify-center hover:bg-slate-600 transition-colors"
                     aria-label="LINE"
                   >
@@ -476,7 +343,7 @@ export default function HomePage() {
                         href="/collection"
                         className="hover:text-white transition-colors"
                       >
-                        ขายส่งเสื้อยืดทั้งหมด
+                        {SITE_CONFIG.keywords.primary[0]}ทั้งหมด
                       </Link>
                     </li>
                     <li>
@@ -500,42 +367,42 @@ export default function HomePage() {
               </div>
               <div>
                 <h4 className="text-lg font-semibold mb-4">
-                  บริการขายส่งเสื้อยืด
+                  บริการ{SITE_CONFIG.keywords.primary[0]}
                 </h4>
                 <ul className="space-y-2 text-gray-300">
-                  <li>ขายส่งเสื้อยืดขั้นต่ำ 10 ตัว</li>
-                  <li>สกรีนลายตามสั่ง</li>
+                  <li>{SITE_CONFIG.keywords.primary[0]}ขั้นต่ำ 10 ตัว</li>
+                  <li>{SITE_CONFIG.keywords.primary[2]}และ{SITE_CONFIG.keywords.primary[3]}</li>
                   <li>ส่งฟรีทั่วประเทศ</li>
                   <li>รับประกันคุณภาพ</li>
                 </ul>
               </div>
               <div>
                 <h4 className="text-lg font-semibold mb-4">
-                  ติดต่อขายส่งเสื้อยืด
+                  ติดต่อ{SITE_CONFIG.keywords.primary[0]}
                 </h4>
                 <address className="space-y-2 not-italic text-gray-300">
                   <div className="flex items-center">
                     <FaPhoneAlt className="w-4 h-4 mr-2" />
-                    <a href="tel:+66624977952" className="hover:text-white">
-                      062-497-7952
+                    <a href={`tel:${SITE_CONFIG.phone}`} className="hover:text-white">
+                      {SITE_CONFIG.phone.replace('+66', '0').replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3')}
                     </a>
                   </div>
                   <div className="flex items-center">
                     <FaEnvelope className="w-4 h-4 mr-2" />
                     <a
-                      href="mailto:wholesale@teecrafted.com"
+                      href={`mailto:info@${SITE_CONFIG.domain}`}
                       className="hover:text-white"
                     >
-                      wholesale@teecrafted.com
+                      info@{SITE_CONFIG.domain}
                     </a>
                   </div>
                   <div className="flex items-center">
                     <FaCommentDots className="w-4 h-4 mr-2" />
                     <a
-                      href="https://line.me/ti/p/@teecrafted"
+                      href={`https://line.me/ti/p/${SITE_CONFIG.social.instagram}`}
                       className="hover:text-white"
                     >
-                      @teecrafted
+                      {SITE_CONFIG.social.instagram}
                     </a>
                   </div>
                 </address>
@@ -543,8 +410,7 @@ export default function HomePage() {
             </div>
             <div className="pt-8 mt-8 border-t border-gray-700 text-center text-gray-400">
               <p>
-                &copy; 2024 TeeCrafted - ขายส่งเสื้อยืด
-                ขายส่งเสื้อสกรีนจำนวนมาก. สงวนลิขสิทธิ์. |{" "}
+                &copy; 2024 {SITE_CONFIG.name} - {SITE_CONFIG.keywords.primary.join(", ")}. สงวนลิขสิทธิ์. |{" "}
                 <Link href="/privacy" className="hover:text-white">
                   นโยบายความเป็นส่วนตัว
                 </Link>{" "}
