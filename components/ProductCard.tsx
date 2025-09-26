@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 interface Product {
   id: number;
@@ -19,9 +20,11 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     <div className="group bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300 border border-gray-100">
       <Link href={`/product/${product.id}`}>
         <div className="relative overflow-hidden rounded-t-lg aspect-square">
-          <img
+          <Image
             src={product.image}
             alt={product.name}
+            width={400}
+            height={400}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
           />
           {product.featured && (

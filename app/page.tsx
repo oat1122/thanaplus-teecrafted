@@ -1,12 +1,13 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React from "react";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import ProductCard from "@/components/ProductCard";
 import EnhancedSEOContentSection from "@/components/EnhancedSEOSection";
 import { products } from "@/data/products";
 import Link from "next/link";
+import Image from "next/image";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import {
   FaBox,
@@ -21,9 +22,7 @@ import {
   FaCommentDots,
   FaFacebookF,
   FaEnvelope,
-  FaMapMarkerAlt,
 } from "react-icons/fa";
-import { MdLocalShipping, MdDesignServices } from "react-icons/md";
 
 export default function HomePage() {
   const featuredProducts = products.filter((product) => product.featured);
@@ -345,9 +344,11 @@ export default function HomePage() {
               ].map((category, index) => (
                 <Link key={index} href={category.href} className="group animate-on-scroll opacity-0" style={{ transitionDelay: `${0.2 * (index + 1) + 0.3}s` }}>
                   <article className="relative overflow-hidden rounded-2xl aspect-square card-minimal hover-lift">
-                    <img
+                    <Image
                       src={category.image}
                       alt={category.alt}
+                      width={600}
+                      height={600}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                       loading="lazy"
                     />

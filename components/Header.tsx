@@ -20,10 +20,6 @@ const Header = () => {
   
   // Close mobile menu when route changes, when clicked outside, or when screen size changes
   useEffect(() => {
-    const handleRouteChange = () => {
-      setIsMobileMenuOpen(false);
-    };
-    
     // Close menu when clicking outside
     const handleClickOutside = (e: MouseEvent) => {
       const target = e.target as HTMLElement;

@@ -35,7 +35,7 @@ const CopyFallbackModal: React.FC<CopyFallbackModalProps> = ({
         </div>        <div className="p-3 sm:p-4">
           <p className="mb-2 text-xs sm:text-sm text-gray-600">
             ไม่สามารถคัดลอกอัตโนมัติได้ กรุณาคลิกในกล่องข้อความแล้วเลือก
-            "คัดลอก" หรือกด Ctrl+C (Cmd+C บน Mac)
+            &ldquo;คัดลอก&rdquo; หรือกด Ctrl+C (Cmd+C บน Mac)
           </p>
           <p className="mb-2 text-xs sm:text-sm text-blue-600 font-medium">
             <span className="bg-blue-50 inline-block px-1 py-0.5 rounded-sm">หลังจากคัดลอกแล้ว กรุณาเปิดแอพ LINE และวางข้อความเพื่อส่งคำสั่งซื้อ หรือแอด @teecrafted และส่งข้อความนี้</span>

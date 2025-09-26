@@ -21,7 +21,7 @@ import {
   FaCertificate,
 } from "react-icons/fa";
 import { BiStats, BiSupport } from "react-icons/bi";
-import { MdDesignServices, MdLocalShipping } from "react-icons/md";
+import { MdDesignServices } from "react-icons/md";
 
 const EnhancedSEOContentSection = () => {
   const services = [

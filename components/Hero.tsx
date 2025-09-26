@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 const Hero = () => {
   return (
@@ -33,9 +34,11 @@ const Hero = () => {
           {/* Hero Image */}
           <div className="relative">
             <div className="relative z-10">
-              <img
+              <Image
                 src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"
                 alt="Featured T-shirt"
+                width={800}
+                height={600}
                 className="w-full max-w-md mx-auto rounded-2xl shadow-lg"
               />
             </div>
