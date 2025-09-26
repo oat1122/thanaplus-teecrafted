@@ -5,6 +5,7 @@ import CartComponent from "@/components/CartComponent";
 import { metadata as siteMetadata, SITE_CONFIG, STRUCTURED_DATA } from "./metadata";
 import "./globals.css";
 import "./custom-animations-minimal.css";
+import "./cafe-minimal.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

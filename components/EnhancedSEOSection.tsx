@@ -26,156 +26,176 @@ import { MdDesignServices } from "react-icons/md";
 const EnhancedSEOContentSection = () => {
   const services = [
     {
-      title: "เสื้อยืดโรงเรียน",
-      desc: "รับสกรีนโลโก้โรงเรียน ตราสัญลักษณ์ ขั้นต่ำ 20 ตัว",
+      title: "เสื้อผ้าแฟชั่นผู้หญิง",
+      desc: "คอลเลคชั่นสไตล์คาเฟ่ มินิมอล ใส่สบาย ถ่ายรูปสวยทุกองศา สำหรับสาวยุคใหม่",
       icon: FaSchool,
-      color: "text-slate-600",
+      color: "text-cafe-coffee",
+      gradientFrom: "cafe-sage",
+      gradientTo: "cafe-gold",
     },
     {
-      title: "เสื้อยืดบริษัท",
-      desc: "เครื่องแบบพนักงาน โลโก้บริษัท สีและขนาดครบ",
+      title: "เสื้อครอปทรงสวย",
+      desc: "ดีไซน์เข้ารูป เน้นสัดส่วน มิกซ์แมทช์ได้ง่าย เหมาะกับทุกรูปร่างและไลฟ์สไตล์",
       icon: FaBuilding,
-      color: "text-slate-600",
+      color: "text-cafe-coffee",
+      gradientFrom: "cafe-copper",
+      gradientTo: "cafe-terracotta",
     },
     {
-      title: "เสื้อยืดองค์กร",
-      desc: "สำหรับกิจกรรมองค์กร อีเวนต์ ประชุม เซมินาร์",
+      title: "เสื้อผ้าวินเทจ",
+      desc: "สไตล์คลาสสิคย้อนยุค เสน่ห์แบบเก่าแก่ ใส่แล้วมีเอกลักษณ์เฉพาตัว",
       icon: FaUniversity,
-      color: "text-slate-600",
+      color: "text-cafe-coffee",
+      gradientFrom: "cafe-dark-brown",
+      gradientTo: "cafe-mocha",
     },
     {
-      title: "เสื้อยืดกิจกรรม",
-      desc: "งานวิ่ง คอนเสิร์ต เทศกาล งานแต่งงาน",
+      title: "เสื้อโอเวอร์ไซส์",
+      desc: "ลุคชิลๆ สบายๆ ใส่ได้ทั้งผู้หญิงและผู้ชาย แมทช์กับอะไรก็เท่ ใส่ไปไหนก็เก๋",
       icon: FaCalendarAlt,
-      color: "text-slate-600",
+      color: "text-cafe-coffee",
+      gradientFrom: "cafe-espresso",
+      gradientTo: "cafe-coffee",
     },
   ];
 
   const stats = [
     {
-      number: "10+",
-      label: "ปีประสบการณ์",
-      sublabel: "ขายส่งเสื้อยืด",
-      icon: BiStats,
-    },
-    {
-      number: "5000+",
-      label: "ลูกค้าพึงพอใจ",
-      sublabel: "ขายเสื้อยืดจำนวนมาก",
+      number: "5,000+",
+      label: "ลูกค้าไว้ใจ",
+      sublabel: "เสื้อผ้าคุณภาพพรีเมียม",
       icon: FaUsers,
+      gradientFrom: "cafe-gold",
+      gradientTo: "cafe-copper",
     },
     {
-      number: "99฿",
+      number: "100+",
+      label: "ดีไซน์ใหม่ทุกเดือน", 
+      sublabel: "อัพเดทเทรนด์ไม่หยุด",
+      icon: BiStats,
+      gradientFrom: "cafe-sage",
+      gradientTo: "cafe-terracotta",
+    },
+    {
+      number: "199฿",
       label: "ราคาเริ่มต้น",
-      sublabel: "เสื้อยืดขายส่ง",
+      sublabel: "คุณภาพเกินราคา",
       icon: FaDollarSign,
+      gradientFrom: "cafe-coffee",
+      gradientTo: "cafe-espresso",
     },
     {
-      number: "24ชม",
-      label: "ตอบกลับเร็ว",
-      sublabel: "ใบเสนอราคา",
+      number: "24 ชม.",
+      label: "จัดส่งรวดเร็ว",
+      sublabel: "ส่งฟรีทั่วประเทศ",
       icon: BiSupport,
+      gradientFrom: "cafe-dark-brown",
+      gradientTo: "cafe-mocha",
     },
   ];
 
   const processSteps = [
     {
       step: "01",
-      title: "สอบถามและปรึกษา",
-      desc: "แจ้งความต้องการ รับใบเสนอราคาฟรี",
+      title: "เลือกสไตล์ที่ใช่",
+      desc: "เลือกจาก เสื้อผ้าแฟชั่นผู้หญิง เสื้อครอป หรือเสื้อผ้าไปคาเฟ่ ที่เข้ากับบุคลิกของคุณ",
       icon: FaCommentDots,
-      bgColor: "bg-slate-100",
+      bgColor: "cafe-sage",
+      textColor: "text-white",
     },
     {
-      step: "02",
-      title: "เลือกแบบและสี",
-      desc: "เลือกจากแบบที่มี หรือให้เราออกแบบให้",
+      step: "02", 
+      title: "สั่งซื้อง่าย ๆ",
+      desc: "แชทไลน์หรือโทรสอบถาม ทีมงานมืออาชีพดูแลและให้คำแนะนำตัวต่อตัว",
       icon: FaPalette,
-      bgColor: "bg-gray-800",
+      bgColor: "cafe-coffee",
+      textColor: "text-white",
     },
     {
       step: "03",
-      title: "ยืนยันคำสั่งซื้อ",
-      desc: "ตรวจสอบรายละเอียด วันส่งของ",
+      title: "จัดส่งรวดเร็ว",
+      desc: "บรรจุอย่างประณีต จัดส่งฟรีทั่วไทย ได้ของภายใน 24-48 ชั่วโมง",
       icon: FaBox,
-      bgColor: "bg-slate-100",
+      bgColor: "cafe-copper",
+      textColor: "text-white",
     },
     {
       step: "04",
-      title: "ผลิตและจัดส่ง",
-      desc: "ผลิตตามคุณภาพมาตรฐาน จัดส่งตรงเวลา",
+      title: "ใส่แล้วปัง!",
+      desc: "มั่นใจในทุกการแต่งตัว ถ่ายรูปสวย รับคำชม และสร้างความประทับใจได้ทุกที่",
       icon: FaShippingFast,
-      bgColor: "bg-slate-600",
+      bgColor: "cafe-gold",
+      textColor: "text-cafe-espresso",
     },
   ];
 
   return (
-    <section className="py-20 bg-gray-50 relative overflow-hidden">
-      {/* Minimal Background Pattern */}
-      <div className="absolute inset-0 bg-minimal-pattern opacity-40"></div>
+    <section className="py-20 cafe-section-bg relative overflow-hidden">
+      {/* Cafe Background Elements */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute top-10 left-10 w-20 h-20 rounded-full" style={{ background: 'var(--cafe-gold)' }}></div>
+        <div className="absolute top-32 right-20 w-16 h-16 rounded-full" style={{ background: 'var(--cafe-copper)' }}></div>
+        <div className="absolute bottom-20 left-1/4 w-12 h-12 rounded-full" style={{ background: 'var(--cafe-sage)' }}></div>
+        <div className="absolute bottom-32 right-1/3 w-24 h-24 rounded-full" style={{ background: 'var(--cafe-terracotta)' }}></div>
+      </div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="max-w-7xl mx-auto">
           {/* Header Section */}
           <div className="text-center mb-16 animate-fade-in">
-            <div className="inline-flex items-center justify-center w-16 h-16 bg-white rounded-2xl shadow-md mb-6">
-              <FaTshirt className="w-8 h-8 text-slate-600" />
+            <div className="cafe-icon-box w-20 h-20 mx-auto mb-8 cafe-animate-glow">
+              <FaTshirt className="w-10 h-10" />
             </div>
-            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight text-balance">
-              ขายส่งเสื้อยืด ผู้เชี่ยวชาญด้านเสื้อสกรีนจำนวนมาก
+            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold cafe-heading-primary mb-6 leading-tight text-balance">
+              CafeWearTH - เสื้อผ้าแฟชั่นผู้หญิง 
+              <span className="block cafe-text-secondary text-3xl sm:text-4xl lg:text-5xl mt-2">
+                สไตล์คาเฟ่ • ทรงสวย • ถ่ายรูปปัง
+              </span>
             </h2>
-            <div className="w-24 h-1 bg-slate-600 mx-auto rounded-full mb-6"></div>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              บริการครบวงจรสำหรับการ
-              <strong className="text-slate-700">ขายเสื้อยืดจำนวนมาก</strong>
-              และ<strong className="text-slate-700">ขายส่งเสื้อสกรีน</strong>
-              คุณภาพสูง ราคาส่งพิเศษ
+            <div className="w-32 h-1.5 mx-auto rounded-full mb-8" style={{ background: 'linear-gradient(90deg, var(--cafe-gold), var(--cafe-copper))' }}></div>
+            <p className="text-xl cafe-text-muted max-w-4xl mx-auto leading-relaxed">
+              ร้าน <strong className="cafe-text-secondary">เสื้อผ้าแฟชั่นผู้หญิง</strong> สไตล์คาเฟ่มินิมอล 
+              ที่รวม <strong className="cafe-text-secondary">เสื้อผ้าไปคาเฟ่</strong> และ <strong className="cafe-text-secondary">เสื้อครอป</strong> 
+              ทรงสวย ใส่สบาย ถ่ายรูปปังทุกองศา!
             </p>
           </div>
 
           <div className="grid lg:grid-cols-2 gap-16 items-start">
             {/* Left Column - Main SEO Content */}
             <div className="space-y-8 animate-slide-in">
-              <div className="card-minimal p-8 hover-lift">
+              <div className="cafe-card p-8 hover-lift cafe-animate-float">
                 <div className="flex items-center mb-6">
-                  <div className="w-12 h-12 bg-slate-600 rounded-xl flex items-center justify-center mr-4">
-                    <FaCheckCircle className="w-6 h-6 text-white" />
+                  <div className="cafe-icon-box w-14 h-14 mr-4 cafe-animate-glow">
+                    <FaCheckCircle className="w-7 h-7" />
                   </div>
-                  <h3 className="text-2xl font-bold text-gray-900">
-                    ทำไมต้องเลือก TeeCrafted สำหรับ
-                    <span className="text-slate-600">ขายส่งเสื้อยืด</span>?
+                  <h3 className="text-2xl font-bold cafe-heading-primary">
+                    ทำไมต้อง CafeWearTH? 
+                    <span className="cafe-text-secondary block text-lg mt-1">เสื้อผ้าแฟชั่นสไตล์คาเฟ่ที่ใช่ที่สุด</span>
                   </h3>
                 </div>
-                <div className="space-y-4 text-gray-700 leading-relaxed">
-                  <p>
-                    <strong>TeeCrafted</strong> เป็นผู้นำด้าน
-                    <strong className="text-slate-700">ขายส่งเสื้อยืด</strong>
-                    และ
-                    <strong className="text-slate-700">ขายส่งเสื้อสกรีน</strong>
-                    ที่มีประสบการณ์กว่า 10 ปี ในอุตสาหกรรมเสื้อผ้า
-                    เราเชี่ยวชาญในการให้บริการ
-                    <strong className="text-slate-700">
-                      ขายเสื้อยืดจำนวนมาก
-                    </strong>
-                    สำหรับลูกค้าองค์กร บริษัท โรงเรียน และหน่วยงานต่างๆ
+                <div className="space-y-4 cafe-text-body leading-relaxed">
+                  <p className="text-lg">
+                    <strong>CafeWearTH</strong> เป็นร้าน
+                    <strong className="cafe-text-secondary"> เสื้อผ้าแฟชั่นผู้หญิง</strong> ที่เชี่ยวชาญเรื่องลุคไปคาเฟ่! 
+                    เรา<strong className="cafe-text-secondary"> คัดสรรเสื้อผ้าไปคาเฟ่</strong> ที่ทำให้คุณดูดีและถ่ายรูปสวยทุกมุม
                   </p>
                   <p>
-                    การ
-                    <strong className="text-slate-700">ขายส่งเสื้อยืด</strong>
-                    ของเราครอบคลุมทุกความต้องการ ตั้งแต่เสื้อยืดเปล่า
-                    เสื้อยืดสกรีน ไปจนถึงเสื้อยืดปักโลโก้
-                    ด้วยคุณภาพผ้าที่ได้มาตรฐานสากล
-                    และเทคโนโลยีการพิมพ์ที่ทันสมัย
+                    พิเศษที่ <strong className="cafe-text-secondary">เสื้อครอปผู้หญิง</strong> ทรงสวย เข้ารูป 
+                    และ <strong className="cafe-text-secondary">เสื้อครอปผู้ชาย</strong> unisex style 
+                    ที่คู่รักใส่คู่กันได้อย่างเก๋! ผลิตจากผ้าคุณภาพพรีเมียม ใส่สบาย ไม่ระคายผิว
                   </p>
                   <p>
-                    เรามี
-                    <strong className="text-slate-700">
-                      ขายเสื้อยืดจำนวนมาก
-                    </strong>
-                    พร้อมส่ง กว่า 50 สี และรับออกแบบตามความต้องการของลูกค้า
-                    พร้อมทีมงานมืออาชีพที่คอยให้คำปรึกษา ตั้งแต่การเลือกผ้า
-                    การออกแบบ ไปจนถึงการจัดส่ง
+                    คอลเลคชั่น<strong className="cafe-text-secondary"> เสื้อผ้าแฟชั่น</strong>หลากสไตล์ 
+                    จาก Vintage แนวคลาสสิค, Streetwear สุดเท่, Oversized ใส่สบาย 
+                    จนถึงสไตล์เกาหลีแท้ ด้วยราคาที่คุ้มค่าและจับต้องได้!
                   </p>
+                  <div className="mt-6 p-5 rounded-xl cafe-animate-glow" style={{ background: 'linear-gradient(135deg, var(--cafe-beige), var(--cafe-light-brown))' }}>
+                    <p className="cafe-text-secondary font-bold text-center">
+                      โปรโมชั่นพิเศษ! ลูกค้าใหม่ลด 15% เมื่อซื้อครบ 799 บาท 
+                      <br/>
+                      <span className="text-sm">+ ส่งฟรีทั่วไทย + รับประกันคุณภาพ 30 วัน</span>
+                    </p>
+                  </div>
                 </div>
               </div>
 
@@ -184,47 +204,60 @@ const EnhancedSEOContentSection = () => {
                 {stats.map((stat, index) => (
                   <div
                     key={index}
-                    className="card-minimal p-6 text-center hover-lift"
+                    className="cafe-card p-6 text-center hover-lift cafe-animate-float relative overflow-hidden"
+                    style={{ animationDelay: `${index * 0.2}s` }}
                   >
-                    <div className="flex justify-center mb-3">
-                      <stat.icon className="w-8 h-8 text-slate-600" />
-                    </div>
-                    <div className="text-3xl font-bold text-gray-900 mb-2">
-                      {stat.number}
-                    </div>
-                    <div className="text-sm text-gray-600 font-medium">
-                      {stat.label}
-                    </div>
-                    <div className="text-xs text-gray-500 mt-1">
-                      {stat.sublabel}
+                    <div className="absolute inset-0 opacity-10" style={{ background: `linear-gradient(135deg, var(--${stat.gradientFrom}), var(--${stat.gradientTo}))` }}></div>
+                    <div className="relative z-10">
+                      <div className="flex justify-center mb-3">
+                        <div className="p-2 rounded-lg" style={{ background: `linear-gradient(135deg, var(--${stat.gradientFrom}), var(--${stat.gradientTo}))` }}>
+                          <stat.icon className="w-6 h-6 text-white" />
+                        </div>
+                      </div>
+                      <div className="text-3xl font-bold cafe-heading-primary mb-2">
+                        {stat.number}
+                      </div>
+                      <div className="text-sm cafe-text-secondary font-semibold mb-1">
+                        {stat.label}
+                      </div>
+                      <div className="text-xs cafe-text-muted">
+                        {stat.sublabel}
+                      </div>
                     </div>
                   </div>
                 ))}
               </div>
 
               {/* Service Highlights */}
-              <div className="card-minimal p-8">
+              <div className="cafe-card p-8 hover-lift">
                 <div className="flex items-center mb-6">
-                  <MdDesignServices className="w-8 h-8 text-slate-600 mr-3" />
-                  <h3 className="text-2xl font-bold text-gray-900">
-                    บริการเด่นสำหรับ
-                    <span className="text-slate-600">ขายส่งเสื้อยืด</span>
+                  <div className="cafe-icon-box w-12 h-12 mr-3">
+                    <MdDesignServices className="w-6 h-6" />
+                  </div>
+                  <h3 className="text-2xl font-bold cafe-heading-primary">
+                    คอลเลคชั่นสุดพิเศษ
+                    <span className="cafe-text-secondary block text-base mt-1">เสื้อผ้าแฟชั่นทุกสไตล์ที่คุณต้องการ</span>
                   </h3>
                 </div>
-                <div className="space-y-4">
+                <div className="grid md:grid-cols-2 gap-4">
                   {services.map((service, index) => (
                     <div
                       key={index}
-                      className="flex items-start space-x-4 p-4 rounded-xl hover:bg-gray-50 transition-colors cursor-pointer"
+                      className="group relative p-5 rounded-xl transition-all duration-300 hover:scale-105"
+                      style={{ background: `linear-gradient(135deg, var(--${service.gradientFrom}), var(--${service.gradientTo}))` }}
                     >
-                      <div className="flex-shrink-0">
-                        <service.icon className={`w-6 h-6 ${service.color}`} />
-                      </div>
-                      <div>
-                        <h4 className="font-semibold text-gray-900">
-                          {service.title}
-                        </h4>
-                        <p className="text-sm text-gray-600">{service.desc}</p>
+                      <div className="flex items-start space-x-4">
+                        <div className="flex-shrink-0 p-2 bg-white/20 rounded-lg backdrop-blur-sm">
+                          <service.icon className="w-6 h-6 text-white" />
+                        </div>
+                        <div>
+                          <h4 className="font-bold text-white mb-2 text-lg">
+                            {service.title}
+                          </h4>
+                          <p className="text-white/90 text-sm leading-relaxed">
+                            {service.desc}
+                          </p>
+                        </div>
                       </div>
                     </div>
                   ))}
@@ -232,30 +265,40 @@ const EnhancedSEOContentSection = () => {
               </div>
 
               {/* Quality Guarantee */}
-              <div className="bg-gray-900 text-white rounded-2xl p-8 relative overflow-hidden">
+              <div className="relative overflow-hidden rounded-2xl p-8" style={{ background: 'linear-gradient(135deg, var(--cafe-espresso) 0%, var(--cafe-mocha) 100%)' }}>
                 <div className="absolute top-0 right-0 opacity-10">
-                  <FaTrophy className="w-32 h-32" />
+                  <FaTrophy className="w-32 h-32 text-white" />
                 </div>
+                <div className="absolute -bottom-4 -left-4 w-24 h-24 rounded-full" style={{ background: 'var(--cafe-gold)', opacity: 0.1 }}></div>
                 <div className="relative z-10">
-                  <div className="flex items-center mb-4">
-                    <FaCertificate className="w-8 h-8 text-white mr-3" />
-                    <h4 className="text-2xl font-bold">รับประกันคุณภาพ 100%</h4>
+                  <div className="flex items-center mb-6">
+                    <div className="p-3 rounded-xl" style={{ background: 'var(--cafe-gold)' }}>
+                      <FaCertificate className="w-8 h-8 text-white" />
+                    </div>
+                    <div className="ml-4">
+                      <h4 className="text-2xl font-bold text-white">รับประกันความพึงพอใจ</h4>
+                      <p className="text-white/80">100% หรือคืนเงิน!</p>
+                    </div>
                   </div>
-                  <p className="text-gray-300 mb-6">
-                    สินค้าไม่ตรงตามข้อตกลง เราคืนเงิน 100%
+                  <p className="text-white/90 mb-6 text-lg">
+                    เราใส่ใจทุกรายละเอียด ตั้งแต่คุณภาพผ้า การออกแบบ จนถึงการบริการ 
+                    เพราะความสุขของคุณคือความสำเร็จของเรา!
                   </p>
                   <div className="grid grid-cols-3 gap-4 text-center">
-                    <div>
-                      <FaCheckCircle className="w-6 h-6 mx-auto mb-2 text-green-400" />
-                      <div className="text-sm">คุณภาพผ้าดี</div>
+                    <div className="p-4 rounded-xl bg-white/10 backdrop-blur-sm">
+                      <FaCheckCircle className="w-8 h-8 mx-auto mb-2" style={{ color: 'var(--cafe-gold)' }} />
+                      <div className="text-white font-semibold">ผ้าคุณภาพพรีเมียม</div>
+                      <div className="text-white/70 text-xs mt-1">นิ่ม ใส่สบาย</div>
                     </div>
-                    <div>
-                      <FaCheckCircle className="w-6 h-6 mx-auto mb-2 text-green-400" />
-                      <div className="text-sm">สีไม่ตก ไม่ซีด</div>
+                    <div className="p-4 rounded-xl bg-white/10 backdrop-blur-sm">
+                      <FaCheckCircle className="w-8 h-8 mx-auto mb-2" style={{ color: 'var(--cafe-gold)' }} />
+                      <div className="text-white font-semibold">สีสันสวยงาม</div>
+                      <div className="text-white/70 text-xs mt-1">ไม่ตก ไม่ซีด</div>
                     </div>
-                    <div>
-                      <FaCheckCircle className="w-6 h-6 mx-auto mb-2 text-green-400" />
-                      <div className="text-sm">ทนการซัก</div>
+                    <div className="p-4 rounded-xl bg-white/10 backdrop-blur-sm">
+                      <FaCheckCircle className="w-8 h-8 mx-auto mb-2" style={{ color: 'var(--cafe-gold)' }} />
+                      <div className="text-white font-semibold">ทนทานยาวนาน</div>
+                      <div className="text-white/70 text-xs mt-1">ซักได้เรื่อย ๆ</div>
                     </div>
                   </div>
                 </div>
@@ -265,30 +308,45 @@ const EnhancedSEOContentSection = () => {
             {/* Right Column - Process & Additional Info */}
             <div className="space-y-8 animate-fade-in-up">
               {/* Process Section */}
-              <div className="card-minimal p-8">
+              <div className="cafe-card p-8 hover-lift">
                 <div className="flex items-center mb-8">
-                  <FaClock className="w-8 h-8 text-slate-600 mr-3" />
-                  <h3 className="text-2xl font-bold text-gray-900">
-                    ขั้นตอนการ
-                    <span className="text-slate-600">ขายส่งเสื้อยืด</span>
+                  <div className="cafe-icon-box w-12 h-12 mr-3">
+                    <FaClock className="w-6 h-6" />
+                  </div>
+                  <h3 className="text-2xl font-bold cafe-heading-primary">
+                    ช้อปง่าย ได้ของเร็ว
+                    <span className="cafe-text-secondary block text-base mt-1">เพียง 4 ขั้นตอนสู่ลุคใหม่ที่สวยกว่าเดิม</span>
                   </h3>
                 </div>
                 <div className="space-y-6">
                   {processSteps.map((item, index) => (
                     <div
                       key={index}
-                      className="flex items-start space-x-4 p-4 rounded-xl hover:bg-gray-50 transition-colors"
+                      className="flex items-start space-x-4 p-5 rounded-xl hover:scale-105 transition-all duration-300 relative overflow-hidden group"
+                      style={{ background: 'var(--cafe-warm-white)' }}
                     >
+                      <div className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-300" style={{ background: `var(--${item.bgColor})` }}></div>
                       <div
-                        className={`w-12 h-12 ${item.bgColor} rounded-xl flex items-center justify-center text-white font-bold`}
+                        className={`relative z-10 w-14 h-14 rounded-xl flex items-center justify-center font-bold transition-all duration-300 group-hover:scale-110`}
+                        style={{ background: `var(--${item.bgColor})` }}
                       >
-                        <item.icon className="w-6 h-6" />
+                        <item.icon className={`w-6 h-6 ${item.textColor}`} />
                       </div>
-                      <div>
-                        <h4 className="font-semibold text-gray-900 mb-1">
-                          {item.title}
-                        </h4>
-                        <p className="text-sm text-gray-600">{item.desc}</p>
+                      <div className="relative z-10 flex-1">
+                        <div className="flex items-center mb-2">
+                          <div 
+                            className="text-sm font-bold px-2 py-1 rounded-full mr-2"
+                            style={{ background: `var(--${item.bgColor})`, color: item.textColor === 'text-white' ? 'white' : 'var(--cafe-espresso)' }}
+                          >
+                            {item.step}
+                          </div>
+                          <h4 className="font-bold cafe-heading-secondary text-lg">
+                            {item.title}
+                          </h4>
+                        </div>
+                        <p className="cafe-text-muted leading-relaxed">
+                          {item.desc}
+                        </p>
                       </div>
                     </div>
                   ))}
@@ -296,36 +354,48 @@ const EnhancedSEOContentSection = () => {
               </div>
 
               {/* Final CTA */}
-              <div className="bg-gray-900 text-white rounded-2xl p-8 text-center relative overflow-hidden">
+              <div className="relative overflow-hidden rounded-2xl p-8 text-center" style={{ background: 'linear-gradient(135deg, var(--cafe-coffee) 0%, var(--cafe-espresso) 100%)' }}>
                 <div className="absolute inset-0 bg-gradient-to-br from-transparent via-white/5 to-transparent"></div>
+                <div className="absolute top-4 right-4 opacity-20">
+                  <div className="w-16 h-16 rounded-full" style={{ background: 'var(--cafe-gold)' }}></div>
+                </div>
+                <div className="absolute bottom-4 left-4 opacity-20">
+                  <div className="w-12 h-12 rounded-full" style={{ background: 'var(--cafe-copper)' }}></div>
+                </div>
                 <div className="relative z-10">
-                  <div className="w-16 h-16 bg-slate-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                    <FaTshirt className="w-8 h-8 text-white" />
+                  <div className="cafe-icon-box w-20 h-20 mx-auto mb-6 cafe-animate-glow">
+                    <FaTshirt className="w-10 h-10" />
                   </div>
-                  <h4 className="text-2xl font-bold mb-4">
-                    พร้อมเริ่มต้น
-                    <span className="text-slate-300">ขายส่งเสื้อยืด</span>
-                    แล้วหรือยัง?
+                  <h4 className="text-3xl font-bold mb-4 text-white">
+                    พร้อมเป็น
+                    <span className="block text-2xl mt-2" style={{ color: 'var(--cafe-gold)' }}>
+                      "สาวมั่นสไตล์คาเฟ่" แล้วหรือยัง?
+                    </span>
                   </h4>
-                  <p className="text-gray-300 mb-6">
-                    รับใบเสนอราคาฟรี ไม่มีขั้นต่ำ ปรึกษาได้ 24 ชั่วโมง
+                  <p className="text-white/90 mb-8 text-lg max-w-md mx-auto leading-relaxed">
+                    เริ่มต้นลุคใหม่ที่สวยกว่าเดิม แชทเลยเพื่อรับคำแนะนำสไตล์ฟรี! 
+                    พร้อมส่วนลดพิเศษสำหรับสมาชิกใหม่
                   </p>
-                  <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                  <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
                     <Link
                       href="tel:+66624977952"
-                      className="btn-minimal bg-white text-gray-900 hover:bg-gray-100 inline-flex items-center justify-center"
+                      className="cafe-button-secondary flex items-center justify-center text-lg font-semibold hover:scale-105 transition-transform"
                     >
-                      <FaPhoneAlt className="w-4 h-4 mr-2" />
-                      สอบถามทาง Line
+                      <FaPhoneAlt className="w-5 h-5 mr-2" />
+                      โทรเลย!
                     </Link>
                     <Link
-                      href="https://line.me/ti/p/@teecrafted"
-                      className="btn-minimal bg-slate-600 text-white hover:bg-slate-700 border-2 border-slate-600 inline-flex items-center justify-center"
+                      href="https://line.me/ti/p/@cafewearth"
+                      className="flex items-center justify-center px-6 py-3 rounded-lg font-semibold text-lg transition-all hover:scale-105"
+                      style={{ background: 'var(--cafe-sage)', color: 'white' }}
                     >
-                      <FaCommentDots className="w-4 h-4 mr-2" />
-                      โทรสอบถาม
+                      <FaCommentDots className="w-5 h-5 mr-2" />
+                      แชท LINE
                     </Link>
                   </div>
+                  <p className="text-white/70 text-sm mt-4">
+                    ตอบกลับเร็ว ภายใน 5 นาที | ส่งฟรีทั่วไทย
+                  </p>
                 </div>
               </div>
             </div>
