@@ -29,10 +29,7 @@ const Hero = () => {
 
           {/* Visual */}
           <div className="relative">
-            <div className="relative z-10 rounded-3xl shadow-xl ring-1 ring-black/5 bg-white/60 backdrop-blur-sm p-4 sm:p-5">
-              {/* ขยาย max-width เพื่อให้ 3D ใหญ่ขึ้นในกรอบ */}
-              <TShirtViewer className="mx-auto w-full max-w-[880px] sm:max-w-[760px] md:max-w-[820px] lg:max-w-[880px] rounded-2xl" />
-            </div>
+            <TShirtViewer className="mx-auto w-full max-w-[880px] sm:max-w-[760px] md:max-w-[820px] lg:max-w-[880px]" />
             {/* พื้นหลังประกอบ (ไม่ใช่เงา 3D) */}
             <div className="pointer-events-none absolute -inset-6 sm:-inset-8 rotate-6 opacity-30 -z-10">
               <div className="h-full w-full bg-slate-100 rounded-3xl shadow-inner" />
