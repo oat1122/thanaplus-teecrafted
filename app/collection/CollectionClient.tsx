@@ -1,21 +1,22 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import Header from "@/components/Header";
-import ProductCard from "@/components/ProductCard";
-import { products } from "@/data/products";
+import { useState } from 'react';
+import Header from '@/components/Header';
+import ProductCard from '@/components/ProductCard';
+import { products } from '@/data/products';
 
 const CollectionClient = () => {
-  const [selectedCategory, setSelectedCategory] = useState("ทั้งหมด");
-  const [sortBy, setSortBy] = useState("ล่าสุด");
+  const [selectedCategory, setSelectedCategory] = useState('ทั้งหมด');
+  const [sortBy, setSortBy] = useState('ล่าสุด');
 
-  const categories = ["ทั้งหมด", "เสื้อยืด", "เสื้อโปโล", "เสื้อฮู้ด"];
+  const categories = ['ทั้งหมด', 'เสื้อยืด', 'เสื้อโปโล', 'เสื้อฮู้ด'];
   const filteredProducts =
-    selectedCategory === "ทั้งหมด"
+    selectedCategory === 'ทั้งหมด'
       ? products
-      : products.filter((product) => product.category === selectedCategory);  const sortedProducts = [...filteredProducts].sort((a, b) => {
+      : products.filter((product) => product.category === selectedCategory);
+  const sortedProducts = [...filteredProducts].sort((a, b) => {
     // เรียงลำดับตามตัวเลือกที่ผู้ใช้เลือกก่อน
-    if (sortBy === "ราคาต่ำ-สูง") {
+    if (sortBy === 'ราคาต่ำ-สูง') {
       const priceDiff = a.price - b.price;
       // ถ้าราคาเท่ากัน ให้ featured อยู่ก่อน
       if (priceDiff === 0) {
@@ -24,8 +25,8 @@ const CollectionClient = () => {
       }
       return priceDiff;
     }
-    
-    if (sortBy === "ราคาสูง-ต่ำ") {
+
+    if (sortBy === 'ราคาสูง-ต่ำ') {
       const priceDiff = b.price - a.price;
       // ถ้าราคาเท่ากัน ให้ featured อยู่ก่อน
       if (priceDiff === 0) {
@@ -34,11 +35,11 @@ const CollectionClient = () => {
       }
       return priceDiff;
     }
-    
+
     // ล่าสุด - แสดง featured ก่อน และถ้า featured เหมือนกันให้เรียงตาม id
     if (a.featured && !b.featured) return -1;
     if (!a.featured && b.featured) return 1;
-    
+
     // เรียงตาม id (สมมติว่า id สูงคือสินค้าใหม่)
     return b.id - a.id;
   });
@@ -51,9 +52,7 @@ const CollectionClient = () => {
       <section className="bg-white py-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">
-              สินค้าทั้งหมด
-            </h1>
+            <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">สินค้าทั้งหมด</h1>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
               เสื้อสกรีนคุณภาพสูง ดีไซน์หลากหลาย เลือกได้ตามใจ
             </p>
@@ -75,8 +74,8 @@ const CollectionClient = () => {
                     onClick={() => setSelectedCategory(category)}
                     className={`px-6 py-3 rounded-full font-medium transition-colors ${
                       selectedCategory === category
-                        ? "bg-gray-900 text-white"
-                        : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                        ? 'bg-gray-900 text-white'
+                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                     }`}
                   >
                     {category}
@@ -110,9 +109,7 @@ const CollectionClient = () => {
           {/* No Products Message */}
           {sortedProducts.length === 0 && (
             <div className="text-center py-16">
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                ไม่พบสินค้าในหมวดหมู่นี้
-              </h3>
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">ไม่พบสินค้าในหมวดหมู่นี้</h3>
               <p className="text-gray-600">ลองเลือกหมวดหมู่อื่นดูสิ</p>
             </div>
           )}

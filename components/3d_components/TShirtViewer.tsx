@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import React, { Suspense, useState, useRef } from "react";
-import { Canvas } from "@react-three/fiber";
-import { OrbitControls, useGLTF, Environment, Center } from "@react-three/drei";
-import * as THREE from "three";
+import React, { Suspense, useState, useRef } from 'react';
+import { Canvas } from '@react-three/fiber';
+import { OrbitControls, useGLTF, Environment, Center } from '@react-three/drei';
+import * as THREE from 'three';
 
 interface TShirtModelProps {
   url: string;
@@ -48,29 +48,29 @@ function TShirtModel({ url, color }: TShirtModelProps) {
     </Center>
   );
 }
-useGLTF.preload("/3D/t_shirt.glb");
+useGLTF.preload('/3D/t_shirt.glb');
 
 interface TShirtViewerProps {
   className?: string;
   color?: string;
 }
 
-export default function TShirtViewer({ className = "", color = "#ffffff" }: TShirtViewerProps) {
+export default function TShirtViewer({ className = '', color = '#ffffff' }: TShirtViewerProps) {
   const [currentColor, setCurrentColor] = useState(color);
 
   const colorOptions = [
-    { name: "ขาว", value: "#ffffff" },
-    { name: "ดำ", value: "#000000" },
-    { name: "แดง", value: "#dc2626" },
-    { name: "น้ำเงิน", value: "#2563eb" },
-    { name: "เขียว", value: "#16a34a" },
-    { name: "เหลือง", value: "#eab308" },
-    { name: "ชมพู", value: "#ec4899" },
-    { name: "เทา", value: "#6b7280" },
+    { name: 'ขาว', value: '#ffffff' },
+    { name: 'ดำ', value: '#000000' },
+    { name: 'แดง', value: '#dc2626' },
+    { name: 'น้ำเงิน', value: '#2563eb' },
+    { name: 'เขียว', value: '#16a34a' },
+    { name: 'เหลือง', value: '#eab308' },
+    { name: 'ชมพู', value: '#ec4899' },
+    { name: 'เทา', value: '#6b7280' },
   ];
 
   return (
-    <div className={["relative w-full aspect-square", className].join(" ")}>
+    <div className={['relative w-full aspect-square', className].join(' ')}>
       {/* Color picker - วางทางขวาและเรียงเป็นแถวตั้ง */}
       <div className="absolute top-1/2 right-4 -translate-y-1/2 z-10 bg-white/90 backdrop-blur-sm rounded-lg p-3 shadow-lg">
         <h3 className="text-sm font-medium text-gray-700 mb-3 text-center">เลือกสี</h3>
@@ -81,8 +81,8 @@ export default function TShirtViewer({ className = "", color = "#ffffff" }: TShi
               onClick={() => setCurrentColor(option.value)}
               className={`w-8 h-8 rounded-full border-2 transition-all duration-200 ${
                 currentColor === option.value
-                  ? "border-gray-800 scale-110 shadow-md"
-                  : "border-gray-300 hover:border-gray-500"
+                  ? 'border-gray-800 scale-110 shadow-md'
+                  : 'border-gray-300 hover:border-gray-500'
               }`}
               style={{ backgroundColor: option.value }}
               title={option.name}
@@ -94,7 +94,7 @@ export default function TShirtViewer({ className = "", color = "#ffffff" }: TShi
       <Canvas
         dpr={[1, 2]}
         camera={{ position: [0, 0, 2.8], fov: 28 }} // ปรับระยะและ fov ให้เหมาะสมกับ aspect-square
-        style={{ position: "absolute", inset: 0, background: "transparent" }}
+        style={{ position: 'absolute', inset: 0, background: 'transparent' }}
       >
         {/* ปรับแสงให้นุ่มและสม่ำเสมอ เพื่อให้ดูเป็นเสื้อยืดมากขึ้น */}
         <ambientLight intensity={0.9} />
@@ -112,7 +112,7 @@ export default function TShirtViewer({ className = "", color = "#ffffff" }: TShi
           enableZoom={false}
           enableRotate={true}
           autoRotate
-          autoRotateSpeed={0.6}      // ถ้าหมุนทิศกลับกันให้เปลี่ยนเป็น -0.6
+          autoRotateSpeed={0.6} // ถ้าหมุนทิศกลับกันให้เปลี่ยนเป็น -0.6
           minPolarAngle={Math.PI / 2.1}
           maxPolarAngle={Math.PI / 2.1}
         />

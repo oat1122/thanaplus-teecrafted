@@ -1,13 +1,7 @@
-"use client";
+'use client';
 
-import { Product } from "@/data/products";
-import React, {
-  createContext,
-  useContext,
-  useState,
-  useEffect,
-  ReactNode,
-} from "react";
+import { Product } from '@/data/products';
+import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 
 interface CartItem extends Product {
   quantity: number;
@@ -45,13 +39,13 @@ export function CartProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     // This ensures we only run this on client side
     if (typeof window !== 'undefined') {
-      const storedCart = localStorage.getItem("cart");
+      const storedCart = localStorage.getItem('cart');
       if (storedCart) {
         try {
           setCartItems(JSON.parse(storedCart));
         } catch (error) {
-          console.error("Failed to parse cart from localStorage:", error);
-          localStorage.removeItem("cart");
+          console.error('Failed to parse cart from localStorage:', error);
+          localStorage.removeItem('cart');
         }
       }
       setIsInitialized(true);
@@ -62,12 +56,12 @@ export function CartProvider({ children }: { children: ReactNode }) {
     // Only save to localStorage after initialization and on client-side
     if (isInitialized && typeof window !== 'undefined') {
       if (cartItems.length > 0) {
-        localStorage.setItem("cart", JSON.stringify(cartItems));
+        localStorage.setItem('cart', JSON.stringify(cartItems));
       } else {
-        localStorage.removeItem("cart");
+        localStorage.removeItem('cart');
       }
     }
-  }, [cartItems, isInitialized]);// Add an item to cart with options to replace or increment quantity
+  }, [cartItems, isInitialized]); // Add an item to cart with options to replace or increment quantity
   const addToCart = (
     product: Product,
     quantity: number,
@@ -78,8 +72,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
     setCartItems((prevItems) => {
       // Check if the item already exists in the cart with the same size and color
       const existingItemIndex = prevItems.findIndex(
-        (item) =>
-          item.id === product.id && item.size === size && item.color === color
+        (item) => item.id === product.id && item.size === size && item.color === color
       );
 
       if (existingItemIndex > -1) {
@@ -101,7 +94,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
   };
   // Remove an item from cart, considering size and color
   const removeFromCart = (id: number, size?: string, color?: string) => {
-    setCartItems((prevItems) => 
+    setCartItems((prevItems) =>
       prevItems.filter((item) => {
         // If size and color are provided, filter by all criteria
         if (size !== undefined && color !== undefined) {
@@ -139,10 +132,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
   // Calculate total price of all items in cart
   const getCartTotal = () => {
-    return cartItems.reduce(
-      (total, item) => total + item.price * item.quantity,
-      0
-    );
+    return cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
   };
 
   // Get total number of items in cart
@@ -152,14 +142,14 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
   // Generate order code for all items in cart
   const generateOrderCode = () => {
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
 
     let orderCode = `รายการสั่งซื้อ TeeCrafted:\n\n`;
 
     cartItems.forEach((item, index) => {
       orderCode += `${index + 1}. ${item.name}\n`;
-      orderCode += `   ขนาด: ${item.size || "-"}\n`;
-      orderCode += `   สี: ${item.color || "-"}\n`;
+      orderCode += `   ขนาด: ${item.size || '-'}\n`;
+      orderCode += `   สี: ${item.color || '-'}\n`;
       orderCode += `   จำนวน: ${item.quantity} ชิ้น\n`;
       orderCode += `   ราคา: ฿${item.price.toLocaleString()} x ${
         item.quantity
@@ -197,7 +187,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
 export function useCart() {
   const context = useContext(CartContext);
   if (context === undefined) {
-    throw new Error("useCart must be used within a CartProvider");
+    throw new Error('useCart must be used within a CartProvider');
   }
   return context;
 }

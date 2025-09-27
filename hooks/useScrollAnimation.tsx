@@ -1,25 +1,25 @@
-import { useEffect } from "react";
+import { useEffect } from 'react';
 
 export function useScrollAnimation() {
   useEffect(() => {
     // Check if IntersectionObserver is supported
-    if (typeof IntersectionObserver === "undefined") {
+    if (typeof IntersectionObserver === 'undefined') {
       return;
     }
 
     // Find elements with animate-on-scroll class
-    const animateOnScrollElements =
-      document.querySelectorAll(".animate-on-scroll");
+    const animateOnScrollElements = document.querySelectorAll('.animate-on-scroll');
 
     // Find elements with animate-on-load class
-    const animateOnLoadElements = 
-      document.querySelectorAll(".animate-on-load:not(.animate-active)");
-    
+    const animateOnLoadElements = document.querySelectorAll(
+      '.animate-on-load:not(.animate-active)'
+    );
+
     // Immediately animate the on-load elements
-    animateOnLoadElements.forEach(el => {
+    animateOnLoadElements.forEach((el) => {
       // Slight delay for smoother appearance
       setTimeout(() => {
-        el.classList.add("animate-active");
+        el.classList.add('animate-active');
       }, 100);
     });
 
@@ -28,7 +28,7 @@ export function useScrollAnimation() {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add("animate-active");
+            entry.target.classList.add('animate-active');
             // Optional: Once animated, no need to observe anymore
             observer.unobserve(entry.target);
           }
@@ -37,7 +37,7 @@ export function useScrollAnimation() {
       {
         root: null, // Use viewport as root
         threshold: 0.15, // Element is considered visible when 15% is visible
-        rootMargin: "0px 0px -100px 0px", // Margin offset (triggers a bit earlier)
+        rootMargin: '0px 0px -100px 0px', // Margin offset (triggers a bit earlier)
       }
     );
 
@@ -60,29 +60,29 @@ export function useScrollAnimation() {
 // Helper component to wrap animated elements
 export function ScrollAnimation({
   children,
-  className = "",
-  animationType = "fade-up", // Options: fade-up, fade-in, slide-in, scale-in
+  className = '',
+  animationType = 'fade-up', // Options: fade-up, fade-in, slide-in, scale-in
   onLoad = false, // Whether to animate on load (true) or on scroll (false)
 }: {
   children: React.ReactNode;
   className?: string;
-  animationType?: "fade-up" | "fade-in" | "slide-in" | "scale-in";
+  animationType?: 'fade-up' | 'fade-in' | 'slide-in' | 'scale-in';
   onLoad?: boolean;
 }) {
-  let animationClass = "";
-  const animationBase = onLoad ? "animate-on-load" : "animate-on-scroll";
+  let animationClass = '';
+  const animationBase = onLoad ? 'animate-on-load' : 'animate-on-scroll';
 
   switch (animationType) {
-    case "fade-up":
+    case 'fade-up':
       animationClass = `${animationBase} translate-y-8`;
       break;
-    case "fade-in":
+    case 'fade-in':
       animationClass = `${animationBase} opacity-0`;
       break;
-    case "slide-in":
+    case 'slide-in':
       animationClass = `${animationBase} -translate-x-8`;
       break;
-    case "scale-in":
+    case 'scale-in':
       animationClass = `${animationBase} scale-95 opacity-0`;
       break;
     default:

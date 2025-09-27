@@ -12,37 +12,37 @@
   --cafe-espresso: #4a3018;
   --cafe-mocha: #3a2415;
   --cafe-black: #2d1b0f;
-  
+
   /* Accent Colors */
   --cafe-gold: #d4af37;
   --cafe-copper: #b87333;
   --cafe-sage: #9caf88;
   --cafe-terracotta: #c65d07;
-  
+
   /* Text Colors */
   --cafe-text-primary: #3a2415;
   --cafe-text-secondary: #6f4e1c;
   --cafe-text-muted: #8b6914;
   --cafe-text-light: #d4c4b0;
-  
+
   /* Background Colors */
   --cafe-bg-primary: #fef7f0;
   --cafe-bg-secondary: #f5f0e8;
   --cafe-bg-accent: #e8ddd0;
-  
+
   /* Shadows - Soft and Warm */
   --cafe-shadow-sm: 0 2px 4px rgba(106, 78, 28, 0.08);
   --cafe-shadow-md: 0 4px 8px rgba(106, 78, 28, 0.12);
   --cafe-shadow-lg: 0 8px 16px rgba(106, 78, 28, 0.15);
   --cafe-shadow-xl: 0 12px 24px rgba(106, 78, 28, 0.18);
-  
+
   /* Border Radius - Soft curves */
   --cafe-radius-sm: 0.5rem;
   --cafe-radius-md: 0.75rem;
   --cafe-radius-lg: 1rem;
   --cafe-radius-xl: 1.25rem;
   --cafe-radius-2xl: 1.5rem;
-  
+
   /* Transitions */
   --cafe-transition: all 0.3s ease;
   --cafe-transition-slow: all 0.5s ease;
@@ -52,7 +52,12 @@
 body {
   background-color: var(--cafe-bg-primary);
   color: var(--cafe-text-primary);
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family:
+    'Inter',
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    sans-serif;
 }
 
 /* Cafe Minimal Component Classes */
@@ -202,7 +207,8 @@ body {
 
 /* Cafe Animations */
 @keyframes cafe-gentle-float {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0);
   }
   50% {
@@ -211,11 +217,14 @@ body {
 }
 
 @keyframes cafe-warm-glow {
-  0%, 100% {
+  0%,
+  100% {
     box-shadow: var(--cafe-shadow-md);
   }
   50% {
-    box-shadow: var(--cafe-shadow-lg), 0 0 20px rgba(212, 175, 55, 0.15);
+    box-shadow:
+      var(--cafe-shadow-lg),
+      0 0 20px rgba(212, 175, 55, 0.15);
   }
 }
 
@@ -294,7 +303,7 @@ body {
   .cafe-card {
     border-radius: var(--cafe-radius-md);
   }
-  
+
   .cafe-product-card {
     border-radius: var(--cafe-radius-lg);
   }
@@ -307,7 +316,9 @@ body {
 }
 
 .hover-glow:hover {
-  box-shadow: var(--cafe-shadow-lg), 0 0 20px rgba(212, 175, 55, 0.15);
+  box-shadow:
+    var(--cafe-shadow-lg),
+    0 0 20px rgba(212, 175, 55, 0.15);
 }
 
 /* Cafe Focus States */

@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import TShirtViewer from "./3d_components/TShirtViewer";
+import Link from 'next/link';
+import TShirtViewer from './3d_components/TShirtViewer';
 
 const Hero = () => {
   return (
@@ -32,7 +32,10 @@ const Hero = () => {
             <TShirtViewer className="mx-auto w-full max-w-[880px] sm:max-w-[760px] md:max-w-[820px] lg:max-w-[880px] cafe-animate-float" />
             {/* พื้นหลังประกอบ (ไม่ใช่เงา 3D) */}
             <div className="pointer-events-none absolute -inset-6 sm:-inset-8 rotate-6 opacity-30 -z-10">
-              <div className="h-full w-full rounded-3xl shadow-inner" style={{ background: 'var(--cafe-beige)' }} />
+              <div
+                className="h-full w-full rounded-3xl shadow-inner"
+                style={{ background: 'var(--cafe-beige)' }}
+              />
             </div>
           </div>
         </div>

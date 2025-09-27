@@ -1,30 +1,28 @@
-import { Metadata } from "next";
-import Link from "next/link";
-import Image from "next/image";
-import Header from "@/components/Header";
-import ProductCard from "@/components/ProductCard";
-import ProductDetailClient from "./ProductDetailClient";
-import { products } from "@/data/products";
+import { Metadata } from 'next';
+import Link from 'next/link';
+import Image from 'next/image';
+import Header from '@/components/Header';
+import ProductCard from '@/components/ProductCard';
+import ProductDetailClient from './ProductDetailClient';
+import { products } from '@/data/products';
 
 interface PageProps {
   params: Promise<{ id: string }>;
 }
 
 // Generate metadata for SEO
-export async function generateMetadata({
-  params,
-}: PageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { id } = await params;
   const product = products.find((p) => p.id === parseInt(id));
 
   if (!product) {
     return {
-      title: "ไม่พบสินค้า | TeeCrafted",
-      description: "ไม่พบสินค้าที่คุณค้นหา",
+      title: 'ไม่พบสินค้า | TeeCrafted',
+      description: 'ไม่พบสินค้าที่คุณค้นหา',
     };
   }
 
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
 
   return {
     title: `${product.name} | TeeCrafted - เสื้อยืดพิมพ์ลายสุดเจ๋ง`,
@@ -34,20 +32,18 @@ export async function generateMetadata({
     keywords: [
       product.name,
       product.category,
-      "เสื้อยืด",
-      "พิมพ์ลาย",
-      "เสื้อผ้า",
-      "TeeCrafted",
-      "custom t-shirt",
-      "ออกแบบเสื้อ",
-      product.colors?.join(", ") || "",
-      product.sizes?.join(", ") || "",
+      'เสื้อยืด',
+      'พิมพ์ลาย',
+      'เสื้อผ้า',
+      'TeeCrafted',
+      'custom t-shirt',
+      'ออกแบบเสื้อ',
+      product.colors?.join(', ') || '',
+      product.sizes?.join(', ') || '',
     ],
     openGraph: {
       title: `${product.name} | TeeCrafted`,
-      description: `${
-        product.description
-      } ราคา ${product.price.toLocaleString()} บาท`,
+      description: `${product.description} ราคา ${product.price.toLocaleString()} บาท`,
       images: [
         {
           url: `${baseUrl}${product.image}`,
@@ -56,15 +52,13 @@ export async function generateMetadata({
           alt: product.name,
         },
       ],
-      type: "website",
-      siteName: "TeeCrafted",
+      type: 'website',
+      siteName: 'TeeCrafted',
     },
     twitter: {
-      card: "summary_large_image",
+      card: 'summary_large_image',
       title: `${product.name} | TeeCrafted`,
-      description: `${
-        product.description
-      } ราคา ${product.price.toLocaleString()} บาท`,
+      description: `${product.description} ราคา ${product.price.toLocaleString()} บาท`,
       images: [`${baseUrl}${product.image}`],
     },
     alternates: {
@@ -90,10 +84,7 @@ const ProductDetail = async ({ params }: PageProps) => {
         <Header />
         <div className="container mx-auto px-4 py-20 text-center">
           <h1 className="text-2xl font-bold text-gray-900 mb-4">ไม่พบสินค้า</h1>
-          <Link
-            href="/collection"
-            className="text-blue-600 hover:text-blue-800"
-          >
+          <Link href="/collection" className="text-blue-600 hover:text-blue-800">
             กลับไปดูสินค้าทั้งหมด
           </Link>
         </div>
@@ -107,40 +98,38 @@ const ProductDetail = async ({ params }: PageProps) => {
 
   // JSON-LD structured data for product
   const structuredData = {
-    "@context": "https://schema.org",
-    "@type": "Product",
+    '@context': 'https://schema.org',
+    '@type': 'Product',
     name: product.name,
     description: product.description,
-    image: `${process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"}${
-      product.image
-    }`,
+    image: `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}${product.image}`,
     brand: {
-      "@type": "Brand",
-      name: "TeeCrafted",
+      '@type': 'Brand',
+      name: 'TeeCrafted',
     },
     offers: {
-      "@type": "Offer",
+      '@type': 'Offer',
       price: product.price,
-      priceCurrency: "THB",
-      availability: "https://schema.org/InStock",
+      priceCurrency: 'THB',
+      availability: 'https://schema.org/InStock',
       seller: {
-        "@type": "Organization",
-        name: "TeeCrafted",
+        '@type': 'Organization',
+        name: 'TeeCrafted',
       },
     },
     category: product.category,
     additionalProperty: [
       ...(product.sizes
         ? product.sizes.map((size) => ({
-            "@type": "PropertyValue",
-            name: "Size",
+            '@type': 'PropertyValue',
+            name: 'Size',
             value: size,
           }))
         : []),
       ...(product.colors
         ? product.colors.map((color) => ({
-            "@type": "PropertyValue",
-            name: "Color",
+            '@type': 'PropertyValue',
+            name: 'Color',
             value: color,
           }))
         : []),
@@ -165,10 +154,7 @@ const ProductDetail = async ({ params }: PageProps) => {
               หน้าแรก
             </Link>
             <span className="mx-2 text-gray-400">/</span>
-            <Link
-              href="/collection"
-              className="text-gray-500 hover:text-gray-700"
-            >
+            <Link href="/collection" className="text-gray-500 hover:text-gray-700">
               สินค้าทั้งหมด
             </Link>
             <span className="mx-2 text-gray-400">/</span>

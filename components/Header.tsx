@@ -1,11 +1,20 @@
-"use client";
+'use client';
 
-import React, { useState, useEffect } from "react";
-import Link from "next/link";
-import { FaShoppingBag, FaBars, FaTshirt, FaHome, FaTshirt as FaTshirtAlt, FaInfoCircle, FaPhoneAlt, FaShoppingCart } from "react-icons/fa";
-import { useCart } from "@/context/CartContext";
+import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
+import {
+  FaShoppingBag,
+  FaBars,
+  FaTshirt,
+  FaHome,
+  FaTshirt as FaTshirtAlt,
+  FaInfoCircle,
+  FaPhoneAlt,
+  FaShoppingCart,
+} from 'react-icons/fa';
+import { useCart } from '@/context/CartContext';
 
-import useWindowSize from "@/hooks/useWindowSize";
+import useWindowSize from '@/hooks/useWindowSize';
 
 const Header = () => {
   const { getCartItemCount, setIsCartOpen } = useCart();
@@ -43,14 +52,17 @@ const Header = () => {
   return (
     <header className="cafe-header sticky top-0 z-50 backdrop-blur-sm">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">          {/* Logo */}
+        <div className="flex justify-between items-center h-16">
+          {' '}
+          {/* Logo */}
           <Link href="/" className="flex items-center space-x-1.5 sm:space-x-2 group">
             <div className="cafe-icon-box w-7 h-7 sm:w-8 sm:h-8 cafe-animate-glow">
               <FaTshirt className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
             </div>
-            <span className="text-lg sm:text-xl md:text-2xl font-bold cafe-heading-primary">TeeCrafted</span>
+            <span className="text-lg sm:text-xl md:text-2xl font-bold cafe-heading-primary">
+              TeeCrafted
+            </span>
           </Link>
-
           {/* Navigation */}
           <nav className="hidden md:flex space-x-1">
             <Link
@@ -77,7 +89,8 @@ const Header = () => {
             >
               ติดต่อเรา
             </Link>
-          </nav>          {/* Right side actions */}
+          </nav>{' '}
+          {/* Right side actions */}
           <div className="flex items-center space-x-2">
             <button
               onClick={() => setIsCartOpen(true)}
@@ -85,11 +98,16 @@ const Header = () => {
             >
               <FaShoppingBag className="w-4 h-4 sm:w-5 sm:h-5" />
               {mounted && getCartItemCount() > 0 && (
-                <span className="cafe-badge absolute -top-1 -right-1 w-4 h-4 sm:w-5 sm:h-5 flex items-center justify-center text-[10px] sm:text-xs font-bold" style={{ background: 'var(--cafe-terracotta)' }}>
+                <span
+                  className="cafe-badge absolute -top-1 -right-1 w-4 h-4 sm:w-5 sm:h-5 flex items-center justify-center text-[10px] sm:text-xs font-bold"
+                  style={{ background: 'var(--cafe-terracotta)' }}
+                >
                   {getCartItemCount()}
                 </span>
               )}
-            </button>            {/* Mobile menu button */}            <button
+            </button>{' '}
+            {/* Mobile menu button */}{' '}
+            <button
               onClick={(e) => {
                 e.stopPropagation();
                 setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -109,16 +127,18 @@ const Header = () => {
             className="md:hidden absolute top-16 left-0 right-0 cafe-card border-b shadow-xl z-50 animate-slideDown"
             data-mobile-menu
           >
-            <nav className="flex flex-col p-2">              <Link
-              href="/"
-              className="px-4 py-3 my-1 cafe-text-secondary hover:text-gray-900 bg-gray-50 hover:bg-gray-100 rounded-xl transition-all font-medium flex items-center"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              <span className="w-8 h-8 bg-white rounded-full flex items-center justify-center mr-3 shadow-sm">
-                <FaHome className="cafe-text-secondary w-4 h-4" />
-              </span>
-              หน้าแรก
-            </Link>
+            <nav className="flex flex-col p-2">
+              {' '}
+              <Link
+                href="/"
+                className="px-4 py-3 my-1 cafe-text-secondary hover:text-gray-900 bg-gray-50 hover:bg-gray-100 rounded-xl transition-all font-medium flex items-center"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                <span className="w-8 h-8 bg-white rounded-full flex items-center justify-center mr-3 shadow-sm">
+                  <FaHome className="cafe-text-secondary w-4 h-4" />
+                </span>
+                หน้าแรก
+              </Link>
               <Link
                 href="/collection"
                 className="px-4 py-3 my-1 cafe-text-secondary hover:text-gray-900 bg-gray-50 hover:bg-gray-100 rounded-xl transition-all font-medium flex items-center"
@@ -161,7 +181,10 @@ const Header = () => {
                 </span>
                 ตะกร้าสินค้า
                 {mounted && getCartItemCount() > 0 && (
-                  <span className="cafe-badge ml-2 w-5 h-5 flex items-center justify-center text-xs font-bold" style={{ background: 'var(--cafe-terracotta)' }}>
+                  <span
+                    className="cafe-badge ml-2 w-5 h-5 flex items-center justify-center text-xs font-bold"
+                    style={{ background: 'var(--cafe-terracotta)' }}
+                  >
                     {getCartItemCount()}
                   </span>
                 )}

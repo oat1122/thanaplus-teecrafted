@@ -1,19 +1,19 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import { CartProvider } from "@/context/CartContext";
-import CartComponent from "@/components/CartComponent";
-import { metadata as siteMetadata, SITE_CONFIG, STRUCTURED_DATA } from "./metadata";
-import "./globals.css";
-import "./custom-animations-minimal.css";
+import type { Metadata } from 'next';
+import { Geist, Geist_Mono } from 'next/font/google';
+import { CartProvider } from '@/context/CartContext';
+import CartComponent from '@/components/CartComponent';
+import { metadata as siteMetadata, SITE_CONFIG, STRUCTURED_DATA } from './metadata';
+import './globals.css';
+import './custom-animations-minimal.css';
 
 const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+  variable: '--font-geist-sans',
+  subsets: ['latin'],
 });
 
 const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  variable: '--font-geist-mono',
+  subsets: ['latin'],
 });
 
 // Export metadata from metadata.ts
@@ -53,11 +53,7 @@ export default function RootLayout({
 
         {/* Preconnect to external domains */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://images.unsplash.com" />
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
@@ -67,7 +63,7 @@ export default function RootLayout({
             src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX"
             height="0"
             width="0"
-            style={{ display: "none", visibility: "hidden" }}
+            style={{ display: 'none', visibility: 'hidden' }}
           />
         </noscript>
         <CartProvider>
