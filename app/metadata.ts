@@ -40,8 +40,8 @@ export const SITE_CONFIG = {
     offerCount: "100+",
   },
   branding: {
-    themeColor: "#900F0F", // แดงเข้มตามที่ใช้ใน layout
-    tileColor: "#900F0F",
+    themeColor: "#6f4e1c", // Cafe brown theme color
+    tileColor: "#6f4e1c",
   },
   social: {
     twitter: "@cafewearth",

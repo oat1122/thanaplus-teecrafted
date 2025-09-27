@@ -1,0 +1,12 @@
+{
+  "semi": true,                // ปิดท้ายทุกบรรทัดด้วย ;
+  "singleQuote": true,         // ใช้ ' แทน "
+  "tabWidth": 2,               // กำหนด indent = 2 ช่อง
+  "trailingComma": "es5",      // ใส่ , ท้าย object/array เวลา multi-line
+  "printWidth": 100,           // ตัดบรรทัดเมื่อเกิน 100 ตัวอักษร
+  "bracketSpacing": true,      // { foo: bar } แทน {foo:bar}
+  "jsxSingleQuote": false,     // JSX ใช้ "
+  "jsxBracketSameLine": false, // ปิด > ของ JSX ลงบรรทัดใหม่
+  "arrowParens": "always",     // (x) => ... แทน x => ...
+  "endOfLine": "lf"            // ใช้ LF เป็น default (ป้องกันปัญหาบน Git)
+}

@@ -2,6 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import {
   FaCheckCircle,
   FaTshirt,
@@ -32,6 +33,7 @@ const EnhancedSEOContentSection = () => {
       color: "text-cafe-coffee",
       gradientFrom: "cafe-sage",
       gradientTo: "cafe-gold",
+      image: "https://placehold.jp/400x300.png",
     },
     {
       title: "เสื้อครอปทรงสวย",
@@ -40,6 +42,7 @@ const EnhancedSEOContentSection = () => {
       color: "text-cafe-coffee",
       gradientFrom: "cafe-copper",
       gradientTo: "cafe-terracotta",
+      image: "https://placehold.jp/400x300.png",
     },
     {
       title: "เสื้อผ้าวินเทจ",
@@ -48,6 +51,7 @@ const EnhancedSEOContentSection = () => {
       color: "text-cafe-coffee",
       gradientFrom: "cafe-dark-brown",
       gradientTo: "cafe-mocha",
+      image: "https://placehold.jp/400x300.png",
     },
     {
       title: "เสื้อโอเวอร์ไซส์",
@@ -56,6 +60,7 @@ const EnhancedSEOContentSection = () => {
       color: "text-cafe-coffee",
       gradientFrom: "cafe-espresso",
       gradientTo: "cafe-coffee",
+      image: "https://placehold.jp/400x300.png",
     },
   ];
 
@@ -143,6 +148,22 @@ const EnhancedSEOContentSection = () => {
         <div className="max-w-7xl mx-auto">
           {/* Header Section */}
           <div className="text-center mb-16 animate-fade-in">
+            {/* Hero Image */}
+            <div className="relative mx-auto mb-8 max-w-2xl">
+              <Image
+                src="https://placehold.jp/800x400.png"
+                alt="CafeWearTH - เสื้อผ้าแฟชั่นผู้หญิง สไตล์คาเฟ่"
+                width={800}
+                height={400}
+                className="w-full h-auto rounded-2xl shadow-lg cafe-animate-float"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent rounded-2xl"></div>
+              <div className="absolute bottom-6 left-6 text-white">
+                <div className="cafe-badge mb-2">New Collection</div>
+                <h3 className="text-xl font-bold">สไตล์คาเฟ่ล่าสุด</h3>
+              </div>
+            </div>
+            
             <div className="cafe-icon-box w-20 h-20 mx-auto mb-8 cafe-animate-glow">
               <FaTshirt className="w-10 h-10" />
             </div>
@@ -189,12 +210,24 @@ const EnhancedSEOContentSection = () => {
                     จาก Vintage แนวคลาสสิค, Streetwear สุดเท่, Oversized ใส่สบาย 
                     จนถึงสไตล์เกาหลีแท้ ด้วยราคาที่คุ้มค่าและจับต้องได้!
                   </p>
-                  <div className="mt-6 p-5 rounded-xl cafe-animate-glow" style={{ background: 'linear-gradient(135deg, var(--cafe-beige), var(--cafe-light-brown))' }}>
-                    <p className="cafe-text-secondary font-bold text-center">
-                      โปรโมชั่นพิเศษ! ลูกค้าใหม่ลด 15% เมื่อซื้อครบ 799 บาท 
-                      <br/>
-                      <span className="text-sm">+ ส่งฟรีทั่วไทย + รับประกันคุณภาพ 30 วัน</span>
-                    </p>
+                  <div className="mt-6 p-5 rounded-xl cafe-animate-glow relative overflow-hidden" style={{ background: 'linear-gradient(135deg, var(--cafe-beige), var(--cafe-light-brown))' }}>
+                    {/* Background Image */}
+                    <div className="absolute inset-0 opacity-20">
+                      <Image
+                        src="https://placehold.jp/600x200.png"
+                        alt="โปรโมชั่นพิเศษ"
+                        width={600}
+                        height={200}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    <div className="relative z-10">
+                      <p className="cafe-text-secondary font-bold text-center">
+                        โปรโมชั่นพิเศษ! ลูกค้าใหม่ลด 15% เมื่อซื้อครบ 799 บาท 
+                        <br/>
+                        <span className="text-sm">+ ส่งฟรีทั่วไทย + รับประกันคุณภาพ 30 วัน</span>
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -243,21 +276,33 @@ const EnhancedSEOContentSection = () => {
                   {services.map((service, index) => (
                     <div
                       key={index}
-                      className="group relative p-5 rounded-xl transition-all duration-300 hover:scale-105"
-                      style={{ background: `linear-gradient(135deg, var(--${service.gradientFrom}), var(--${service.gradientTo}))` }}
+                      className="group relative overflow-hidden rounded-xl transition-all duration-300 hover:scale-105"
                     >
-                      <div className="flex items-start space-x-4">
-                        <div className="flex-shrink-0 p-2 bg-white/20 rounded-lg backdrop-blur-sm">
-                          <service.icon className="w-6 h-6 text-white" />
+                      {/* Service Image */}
+                      <div className="relative h-48 mb-4">
+                        <Image
+                          src={service.image}
+                          alt={service.title}
+                          width={400}
+                          height={300}
+                          className="w-full h-full object-cover rounded-xl"
+                        />
+                        <div className="absolute inset-0 rounded-xl" style={{ background: `linear-gradient(135deg, var(--${service.gradientFrom})/80, var(--${service.gradientTo})/80)` }}></div>
+                        <div className="absolute top-4 left-4">
+                          <div className="p-3 bg-white/20 rounded-lg backdrop-blur-sm">
+                            <service.icon className="w-6 h-6 text-white" />
+                          </div>
                         </div>
-                        <div>
-                          <h4 className="font-bold text-white mb-2 text-lg">
-                            {service.title}
-                          </h4>
-                          <p className="text-white/90 text-sm leading-relaxed">
-                            {service.desc}
-                          </p>
-                        </div>
+                      </div>
+                      
+                      {/* Service Content */}
+                      <div className="p-4">
+                        <h4 className="font-bold cafe-heading-primary mb-2 text-lg">
+                          {service.title}
+                        </h4>
+                        <p className="cafe-text-muted text-sm leading-relaxed">
+                          {service.desc}
+                        </p>
                       </div>
                     </div>
                   ))}
@@ -266,6 +311,16 @@ const EnhancedSEOContentSection = () => {
 
               {/* Quality Guarantee */}
               <div className="relative overflow-hidden rounded-2xl p-8" style={{ background: 'linear-gradient(135deg, var(--cafe-espresso) 0%, var(--cafe-mocha) 100%)' }}>
+                {/* Background Image */}
+                <div className="absolute inset-0 opacity-10">
+                  <Image
+                    src="https://placehold.jp/800x400.png"
+                    alt="รับประกันคุณภาพ"
+                    width={800}
+                    height={400}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
                 <div className="absolute top-0 right-0 opacity-10">
                   <FaTrophy className="w-32 h-32 text-white" />
                 </div>
@@ -307,6 +362,128 @@ const EnhancedSEOContentSection = () => {
 
             {/* Right Column - Process & Additional Info */}
             <div className="space-y-8 animate-fade-in-up">
+              {/* Customer Testimonials with Images */}
+              <div className="cafe-card p-8 hover-lift">
+                <h3 className="text-2xl font-bold cafe-heading-primary mb-6 text-center">
+                  ลูกค้าพึงพอใจ
+                  <span className="cafe-text-secondary block text-base mt-1">รีวิวจากลูกค้าจริง</span>
+                </h3>
+                <div className="grid grid-cols-2 gap-4 mb-6">
+                  <div className="relative">
+                    <Image
+                      src="https://placehold.jp/300x300.png"
+                      alt="รีวิวลูกค้า 1"
+                      width={300}
+                      height={300}
+                      className="w-full h-32 object-cover rounded-lg"
+                    />
+                    <div className="absolute inset-0 bg-black/20 rounded-lg flex items-center justify-center">
+                      <div className="text-white text-center">
+                        <div className="text-sm font-semibold">&ldquo;ใส่แล้วสวยมาก&rdquo;</div>
+                        <div className="text-xs">⭐⭐⭐⭐⭐</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="relative">
+                    <Image
+                      src="https://placehold.jp/300x300.png"
+                      alt="รีวิวลูกค้า 2"
+                      width={300}
+                      height={300}
+                      className="w-full h-32 object-cover rounded-lg"
+                    />
+                    <div className="absolute inset-0 bg-black/20 rounded-lg flex items-center justify-center">
+                      <div className="text-white text-center">
+                        <div className="text-sm font-semibold">&ldquo;คุณภาพดี ราคาดี&rdquo;</div>
+                        <div className="text-xs">⭐⭐⭐⭐⭐</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <p className="cafe-text-muted text-center">
+                  ลูกค้ามากกว่า 5,000 คนเลือกใจ CafeWearTH
+                </p>
+              </div>
+
+              {/* Product Gallery */}
+              <div className="cafe-card p-8 hover-lift">
+                <h3 className="text-2xl font-bold cafe-heading-primary mb-6 text-center">
+                  แกลเลอรี่สินค้า
+                  <span className="cafe-text-secondary block text-base mt-1">ชมผลงานของเรา</span>
+                </h3>
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="space-y-4">
+                    <div className="relative group cursor-pointer">
+                      <Image
+                        src="https://placehold.jp/250x300.png"
+                        alt="เสื้อครอปผู้หญิง"
+                        width={250}
+                        height={300}
+                        className="w-full h-36 object-cover rounded-lg transition-transform group-hover:scale-105"
+                      />
+                      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 rounded-lg transition-all duration-300 flex items-center justify-center">
+                        <div className="text-white opacity-0 group-hover:opacity-100 transition-opacity">
+                          <FaTshirt className="w-6 h-6 mx-auto" />
+                          <div className="text-xs mt-1">เสื้อครอป</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="relative group cursor-pointer">
+                      <Image
+                        src="https://placehold.jp/250x200.png"
+                        alt="เสื้อโอเวอร์ไซส์"
+                        width={250}
+                        height={200}
+                        className="w-full h-24 object-cover rounded-lg transition-transform group-hover:scale-105"
+                      />
+                      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 rounded-lg transition-all duration-300 flex items-center justify-center">
+                        <div className="text-white opacity-0 group-hover:opacity-100 transition-opacity text-xs">
+                          โอเวอร์ไซส์
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="space-y-4">
+                    <div className="relative group cursor-pointer">
+                      <Image
+                        src="https://placehold.jp/250x200.png"
+                        alt="เสื้อวินเทจ"
+                        width={250}
+                        height={200}
+                        className="w-full h-24 object-cover rounded-lg transition-transform group-hover:scale-105"
+                      />
+                      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 rounded-lg transition-all duration-300 flex items-center justify-center">
+                        <div className="text-white opacity-0 group-hover:opacity-100 transition-opacity text-xs">
+                          วินเทจ
+                        </div>
+                      </div>
+                    </div>
+                    <div className="relative group cursor-pointer">
+                      <Image
+                        src="https://placehold.jp/250x300.png"
+                        alt="เสื้อผ้าไปคาเฟ่"
+                        width={250}
+                        height={300}
+                        className="w-full h-36 object-cover rounded-lg transition-transform group-hover:scale-105"
+                      />
+                      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 rounded-lg transition-all duration-300 flex items-center justify-center">
+                        <div className="text-white opacity-0 group-hover:opacity-100 transition-opacity text-xs">
+                          ลุคไปคาเฟ่
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="text-center mt-6">
+                  <Link
+                    href="/collection"
+                    className="cafe-button-primary inline-flex items-center justify-center"
+                  >
+                    ดูสินค้าทั้งหมด
+                  </Link>
+                </div>
+              </div>
+
               {/* Process Section */}
               <div className="cafe-card p-8 hover-lift">
                 <div className="flex items-center mb-8">
@@ -355,6 +532,16 @@ const EnhancedSEOContentSection = () => {
 
               {/* Final CTA */}
               <div className="relative overflow-hidden rounded-2xl p-8 text-center" style={{ background: 'linear-gradient(135deg, var(--cafe-coffee) 0%, var(--cafe-espresso) 100%)' }}>
+                {/* Background Image */}
+                <div className="absolute inset-0 opacity-10">
+                  <Image
+                    src="https://placehold.jp/600x400.png"
+                    alt="ติดต่อเรา"
+                    width={600}
+                    height={400}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
                 <div className="absolute inset-0 bg-gradient-to-br from-transparent via-white/5 to-transparent"></div>
                 <div className="absolute top-4 right-4 opacity-20">
                   <div className="w-16 h-16 rounded-full" style={{ background: 'var(--cafe-gold)' }}></div>
@@ -369,7 +556,7 @@ const EnhancedSEOContentSection = () => {
                   <h4 className="text-3xl font-bold mb-4 text-white">
                     พร้อมเป็น
                     <span className="block text-2xl mt-2" style={{ color: 'var(--cafe-gold)' }}>
-                      "สาวมั่นสไตล์คาเฟ่" แล้วหรือยัง?
+                      &ldquo;สาวมั่นสไตล์คาเฟ่&rdquo; แล้วหรือยัง?
                     </span>
                   </h4>
                   <p className="text-white/90 mb-8 text-lg max-w-md mx-auto leading-relaxed">

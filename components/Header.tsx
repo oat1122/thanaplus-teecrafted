@@ -17,7 +17,7 @@ const Header = () => {
   useEffect(() => {
     setMounted(true);
   }, []);
-  
+
   // Close mobile menu when route changes, when clicked outside, or when screen size changes
   useEffect(() => {
     // Close menu when clicking outside
@@ -27,14 +27,14 @@ const Header = () => {
         setIsMobileMenuOpen(false);
       }
     };
-    
+
     // Close menu when resizing to desktop
     if (!isMobile && isMobileMenuOpen) {
       setIsMobileMenuOpen(false);
     }
-    
+
     window.addEventListener('click', handleClickOutside);
-    
+
     return () => {
       window.removeEventListener('click', handleClickOutside);
     };
@@ -78,7 +78,8 @@ const Header = () => {
               ติดต่อเรา
             </Link>
           </nav>          {/* Right side actions */}
-          <div className="flex items-center space-x-2">            <button 
+          <div className="flex items-center space-x-2">
+            <button
               onClick={() => setIsCartOpen(true)}
               className="p-2 sm:p-3 cafe-text-secondary hover:text-gray-900 hover:bg-gray-50 rounded-lg transition-colors relative"
             >
@@ -88,7 +89,7 @@ const Header = () => {
                   {getCartItemCount()}
                 </span>
               )}
-            </button>            {/* Mobile menu button */}            <button 
+            </button>            {/* Mobile menu button */}            <button
               onClick={(e) => {
                 e.stopPropagation();
                 setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -102,22 +103,22 @@ const Header = () => {
             </button>
           </div>
         </div>
-          {/* Mobile Navigation Menu */}
+        {/* Mobile Navigation Menu */}
         {isMobileMenuOpen && (
-          <div 
+          <div
             className="md:hidden absolute top-16 left-0 right-0 cafe-card border-b shadow-xl z-50 animate-slideDown"
             data-mobile-menu
           >
             <nav className="flex flex-col p-2">              <Link
-                href="/"
-                className="px-4 py-3 my-1 cafe-text-secondary hover:text-gray-900 bg-gray-50 hover:bg-gray-100 rounded-xl transition-all font-medium flex items-center"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                <span className="w-8 h-8 bg-white rounded-full flex items-center justify-center mr-3 shadow-sm">
-                  <FaHome className="cafe-text-secondary w-4 h-4" />
-                </span>
-                หน้าแรก
-              </Link>
+              href="/"
+              className="px-4 py-3 my-1 cafe-text-secondary hover:text-gray-900 bg-gray-50 hover:bg-gray-100 rounded-xl transition-all font-medium flex items-center"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              <span className="w-8 h-8 bg-white rounded-full flex items-center justify-center mr-3 shadow-sm">
+                <FaHome className="cafe-text-secondary w-4 h-4" />
+              </span>
+              หน้าแรก
+            </Link>
               <Link
                 href="/collection"
                 className="px-4 py-3 my-1 cafe-text-secondary hover:text-gray-900 bg-gray-50 hover:bg-gray-100 rounded-xl transition-all font-medium flex items-center"

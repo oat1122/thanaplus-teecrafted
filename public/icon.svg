@@ -1,0 +1,9 @@
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- T-shirt icon with cafe theme colors -->
+  <rect width="32" height="32" rx="6" fill="#6f4e1c"/>
+  <path d="M8 12v16a1 1 0 001 1h14a1 1 0 001-1V12" stroke="#fef7f0" stroke-width="2" fill="none"/>
+  <path d="M12 8h8v4H12z" fill="#fef7f0"/>
+  <path d="M8 12l4-4v4h8v-4l4 4v3l-2-1v-2H10v2l-2 1v-3z" fill="#fef7f0"/>
+  <circle cx="16" cy="20" r="3" stroke="#d4af37" stroke-width="1.5" fill="none"/>
+  <path d="M16 18v4M14 20h4" stroke="#d4af37" stroke-width="1"/>
+</svg>

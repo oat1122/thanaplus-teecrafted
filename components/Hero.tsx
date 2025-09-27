@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import TShirtViewer from "./TShirtViewer";
+import TShirtViewer from "./3d_components/TShirtViewer";
 
 const Hero = () => {
   return (
