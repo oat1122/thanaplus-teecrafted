@@ -364,7 +364,7 @@ export const generatePageMetadata = (
   };
 };
 
-// Product page metadata generator
+// Product page metadata generator using SITE_CONFIG
 export const generateProductMetadata = (
   productName: string,
   productDescription: string,
@@ -372,15 +372,62 @@ export const generateProductMetadata = (
   image?: string,
   category?: string
 ): Metadata => {
-  const title = `${productName} - ${category || 'เสื้อผ้าแฟชั่น'}`;
-  const description = `${productDescription} ราคา ${price} บาท จาก ${SITE_CONFIG.name} เสื้อผ้าแฟชั่นคุณภาพพรีเมียม`;
+  const title = `${productName} - ${category || SITE_CONFIG.keywords.primary[0]}`;
+  const description = `${productDescription} ราคา ${price.toLocaleString()} บาท จาก ${SITE_CONFIG.name} ${SITE_CONFIG.description}`;
+  const fullTitle = `${title} | ${SITE_CONFIG.displayName}`;
 
   return {
-    ...generatePageMetadata(title, description, [productName, category || '']),
+    title: fullTitle,
+    description,
+    keywords: [
+      productName,
+      category || '',
+      ...SITE_CONFIG.keywords.primary,
+      ...SITE_CONFIG.keywords.secondary.slice(0, 5), // Limit secondary keywords
+    ],
+    authors: [{ name: SITE_CONFIG.author }],
+    creator: SITE_CONFIG.author,
+    publisher: SITE_CONFIG.author,
+    metadataBase: new URL(SITE_CONFIG.url),
+    openGraph: {
+      title: fullTitle,
+      description,
+      url: SITE_CONFIG.url,
+      siteName: SITE_CONFIG.displayName,
+      images: image
+        ? [
+            {
+              url: image,
+              width: 800,
+              height: 800,
+              alt: productName,
+            },
+          ]
+        : [
+            {
+              url: '/og-image.jpg',
+              width: 1200,
+              height: 630,
+              alt: `${productName} - ${SITE_CONFIG.displayName}`,
+            },
+          ],
+      locale: 'th_TH',
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: fullTitle,
+      description,
+      images: image ? [image] : ['/twitter-image.jpg'],
+    },
+    alternates: {
+      canonical: SITE_CONFIG.url,
+    },
     other: {
       'product:price:amount': price.toString(),
-      'product:price:currency': 'THB',
+      'product:price:currency': SITE_CONFIG.pricing.currency,
       'og:type': 'product',
+      'theme-color': SITE_CONFIG.branding.themeColor,
     },
   };
 };

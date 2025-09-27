@@ -5,6 +5,7 @@ import Header from '@/components/Header';
 import ProductCard from '@/components/ProductCard';
 import ProductDetailClient from './ProductDetailClient';
 import { products } from '@/data/products';
+import { generateProductMetadata, SITE_CONFIG } from './metadata';
 
 interface PageProps {
   params: Promise<{ id: string }>;
@@ -17,54 +18,20 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   if (!product) {
     return {
-      title: 'ไม่พบสินค้า | TeeCrafted',
+      title: `ไม่พบสินค้า | ${SITE_CONFIG.displayName}`,
       description: 'ไม่พบสินค้าที่คุณค้นหา',
     };
   }
 
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || SITE_CONFIG.url;
 
-  return {
-    title: `${product.name} | TeeCrafted - เสื้อยืดพิมพ์ลายสุดเจ๋ง`,
-    description: `${
-      product.description
-    } ราคา ${product.price.toLocaleString()} บาท จาก TeeCrafted เสื้อยืดคุณภาพพรีเมียม สั่งทำได้ตามใจ`,
-    keywords: [
-      product.name,
-      product.category,
-      'เสื้อยืด',
-      'พิมพ์ลาย',
-      'เสื้อผ้า',
-      'TeeCrafted',
-      'custom t-shirt',
-      'ออกแบบเสื้อ',
-      product.colors?.join(', ') || '',
-      product.sizes?.join(', ') || '',
-    ],
-    openGraph: {
-      title: `${product.name} | TeeCrafted`,
-      description: `${product.description} ราคา ${product.price.toLocaleString()} บาท`,
-      images: [
-        {
-          url: `${baseUrl}${product.image}`,
-          width: 800,
-          height: 800,
-          alt: product.name,
-        },
-      ],
-      type: 'website',
-      siteName: 'TeeCrafted',
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: `${product.name} | TeeCrafted`,
-      description: `${product.description} ราคา ${product.price.toLocaleString()} บาท`,
-      images: [`${baseUrl}${product.image}`],
-    },
-    alternates: {
-      canonical: `${baseUrl}/product/${product.id}`,
-    },
-  };
+  return generateProductMetadata(
+    product.name,
+    product.description || `สินค้าคุณภาพจาก ${SITE_CONFIG.name}`,
+    product.price,
+    `${baseUrl}${product.image}`,
+    product.category
+  );
 }
 
 // Generate static params for static generation
@@ -102,19 +69,19 @@ const ProductDetail = async ({ params }: PageProps) => {
     '@type': 'Product',
     name: product.name,
     description: product.description,
-    image: `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}${product.image}`,
+    image: `${process.env.NEXT_PUBLIC_BASE_URL || SITE_CONFIG.url}${product.image}`,
     brand: {
       '@type': 'Brand',
-      name: 'TeeCrafted',
+      name: SITE_CONFIG.name,
     },
     offers: {
       '@type': 'Offer',
       price: product.price,
-      priceCurrency: 'THB',
+      priceCurrency: SITE_CONFIG.pricing.currency,
       availability: 'https://schema.org/InStock',
       seller: {
         '@type': 'Organization',
-        name: 'TeeCrafted',
+        name: SITE_CONFIG.name,
       },
     },
     category: product.category,
