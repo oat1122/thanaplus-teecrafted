@@ -74,7 +74,7 @@ Link: ${baseUrl}/product/${product.id}`;
   };
 
   // Validation
-  const isValidSelection = selectedSize && selectedColor;
+  const isValidSelection = Boolean(selectedSize && selectedColor);
   const showValidationError = (!selectedSize || !selectedColor) && showOrderCode;
 
   return {
